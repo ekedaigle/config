@@ -6,3 +6,5 @@ alias ll='ls -l'
 alias la='ls -a'
 alias ls='ls --color'
 
+tmux attach || tmux new
+clear

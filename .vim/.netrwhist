@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/eakmeister/Library/Contextual Menu Items/DropboxPlugin.plugin'
 let g:netrw_dirhist_2='/Users/eakmeister/Courses/Computer Networking'
 let g:netrw_dirhist_3='/Volumes/SENTHURAN/ogisel-2b'
 let g:netrw_dirhist_4='/Users/eakmeister/Library/Application Support/Skype/ChatStyles/Stockholm.SkypeChatStyle'
 let g:netrw_dirhist_5='/Users/eakmeister/.vim/ftplugin/latex-suite'
 let g:netrw_dirhist_6='/Users/eakmeister/.vim/ftplugin'
+let g:netrw_dirhist_7='/home/ekern/WebFS/WebFS'

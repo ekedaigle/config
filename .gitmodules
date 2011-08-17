@@ -1,0 +1,12 @@
+[submodule "vim/vim/bundle/pyflakes/ftplugin/python/pyflakes"]
+	path = vim/vim/bundle/pyflakes/ftplugin/python/pyflakes
+	url = http://github.com/kevinw/pyflakes.git
+[submodule "vim/vim/bundle/fugitive"]
+	path = vim/vim/bundle/fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim/bundle/tagbar"]
+	path = vim/vim/bundle/tagbar
+	url = http://github.com/majutsushi/tagbar.git
+[submodule "vim/vim/bundle/solarized"]
+	path = vim/vim/bundle/solarized
+	url = http://github.com/altercation/vim-colors-solarized.git

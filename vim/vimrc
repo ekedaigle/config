@@ -1,3 +1,6 @@
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 set ruler
 set ts=4
 set sw=4
@@ -8,8 +11,15 @@ set nohlsearch
 set backspace=2
 set guioptions-=T " turn the menu bar off
 set noswapfile
-colorscheme desert
+set nocompatible
+
 syntax on
+set background=dark
+let g:solarized_termtrans=1
+let g:solarized_termcolor=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+colorscheme solarized
 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 filetype plugin on

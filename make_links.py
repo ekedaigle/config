@@ -1,17 +1,9 @@
 def create_link(file_path, link_path):
 	failed = False
 	try:
-		os.link(file_path, link_path)
+		os.symlink(file_path, link_path)
 	except OSError:
 		failed = True
-	
-	if failed:
-		failed = False
-
-		try:
-			os.symlink(file_path, link_path)
-		except OSError:
-			failed = True
 	
 	return failed
 

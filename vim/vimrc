@@ -1,6 +1,7 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+filetype on
 set ruler
 set ts=4
 set sw=4
@@ -12,6 +13,7 @@ set backspace=2
 set guioptions-=T " turn the menu bar off
 set noswapfile
 set nocompatible
+set foldmethod=indent
 
 syntax on
 set background=dark

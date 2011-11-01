@@ -6,13 +6,16 @@ set ruler
 set ts=4
 set sw=4
 set autoindent
-set smartindent
 set number
 set nohlsearch
 set backspace=2
 set guioptions-=T " turn the menu bar off
 set noswapfile
 set nocompatible
+
+" Don't set smart indent for python files
+set smartindent
+au! FileType python setl nosmartindent
 
 syntax on
 set background=dark

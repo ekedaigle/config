@@ -12,6 +12,7 @@ set backspace=2
 set guioptions-=T " turn the menu bar off
 set noswapfile
 set nocompatible
+set expandtab
 
 " Don't set smart indent for python files
 set smartindent

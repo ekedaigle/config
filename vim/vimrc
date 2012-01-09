@@ -1,17 +1,22 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+filetype plugin on
 set ruler
 set ts=4
 set sw=4
 set autoindent
-set smartindent
 set number
 set nohlsearch
 set backspace=2
 set guioptions-=T " turn the menu bar off
 set noswapfile
 set nocompatible
+set expandtab
+
+" Don't set smart indent for python files
+set smartindent
+au! FileType python setl nosmartindent
 
 syntax on
 set background=dark
@@ -20,6 +25,9 @@ let g:solarized_termcolor=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme desert
+
+let Tlist_Auto_Open=1
+let Tlist_Exit_OnlyWindow=1
 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 filetype plugin on

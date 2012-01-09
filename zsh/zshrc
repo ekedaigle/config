@@ -15,6 +15,7 @@ export EDITOR=vim
 alias l='ls'
 alias ll='ls -l'
 alias la='ls -a'
+alias cs='cscope -R'
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'

@@ -32,4 +32,3 @@ if [[ "$platform" == 'darwin' ]]; then
 fi
 
 tmux attach || tmux new
-clear

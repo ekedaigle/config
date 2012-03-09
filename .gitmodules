@@ -13,3 +13,9 @@
 [submodule "vim/vim/bundle/taglist"]
 	path = vim/vim/bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim
+[submodule "vim/vim/bundle/vim-powerline"]
+	path = vim/vim/bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/vim/bundle/ctrl-p"]
+	path = vim/vim/bundle/ctrl-p
+	url = git://github.com/kien/ctrlp.vim.git

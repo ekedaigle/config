@@ -29,6 +29,18 @@ colorscheme desert
 let Tlist_Auto_Open=1
 let Tlist_Exit_OnlyWindow=1
 
+" Enable Powerline
+set laststatus=2
+set encoding=utf-8
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+
+vnoremap < <gv
+vnoremap > >gv
+nnoremap Y y$
+cmap w!! %!sudo tee > /dev/null %
+
+
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 filetype plugin on
 

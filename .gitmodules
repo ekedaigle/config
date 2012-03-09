@@ -19,3 +19,6 @@
 [submodule "vim/vim/bundle/ctrl-p"]
 	path = vim/vim/bundle/ctrl-p
 	url = git://github.com/kien/ctrlp.vim.git
+[submodule "vim/vim/bundle/supertab"]
+	path = vim/vim/bundle/supertab
+	url = git://github.com/ervandew/supertab.git

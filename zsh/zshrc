@@ -16,6 +16,7 @@ alias l='ls'
 alias ll='ls -l'
 alias la='ls -a'
 alias cs='cscope -R'
+alias v='vim'
 
 alias ssh-r='ssh -R 17773:localhost:3128'
 
@@ -34,5 +35,5 @@ if [[ "$platform" == 'darwin' ]]; then
 	export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH:/Developer/usr/bin:~/Code/Scripts
 fi
 
-tmux attach || tmux new
+#tmux attach || tmux new
 clear

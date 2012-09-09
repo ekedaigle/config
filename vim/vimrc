@@ -1,5 +1,6 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+call pathogen#infect()
 
 filetype plugin on
 set ruler
@@ -34,6 +35,11 @@ set laststatus=2
 set encoding=utf-8
 let g:Powerline_symbols = 'unicode'
 set t_Co=256
+
+" Enable Syntastic
+let g:syntastic_python_checker='pyflakes'
+let g:syntastic_enable_signs=1
+let g:syntastic_enable_highlighting=1
 
 imap jk <Esc>
 imap kj <Esc>

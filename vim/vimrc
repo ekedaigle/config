@@ -18,13 +18,13 @@ set expandtab
 set smartindent
 au! FileType python setl nosmartindent
 
-syntax on
+syntax enable
 set background=dark
-let g:solarized_termtrans=1
-let g:solarized_termcolor=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-colorscheme desert
+"let g:solarized_termtrans=1
+"let g:solarized_termcolor=256
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+colorscheme solarized
 
 let Tlist_Auto_Open=1
 let Tlist_Exit_OnlyWindow=1
@@ -35,6 +35,8 @@ set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 set t_Co=256
 
+imap jk <Esc>
+imap kj <Esc>
 vnoremap < <gv
 vnoremap > >gv
 nnoremap Y y$

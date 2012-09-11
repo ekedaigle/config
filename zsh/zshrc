@@ -17,8 +17,10 @@ alias ll='ls -l'
 alias la='ls -a'
 alias cs='cscope -R'
 alias v='vim'
-
 alias ssh-r='ssh -R 17773:localhost:3128'
+
+# make colors work properly in tmux
+alias tmux="TERM=screen-256color-bce tmux"
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'

@@ -12,19 +12,19 @@
 	url = http://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/vim/bundle/taglist"]
 	path = vim/vim/bundle/taglist
-	url = https://github.com/vim-scripts/taglist.vim
+	url = http://github.com/vim-scripts/taglist.vim
 [submodule "vim/vim/bundle/vim-powerline"]
 	path = vim/vim/bundle/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+	url = http://github.com/Lokaltog/vim-powerline.git
 [submodule "vim/vim/bundle/ctrl-p"]
 	path = vim/vim/bundle/ctrl-p
-	url = git://github.com/kien/ctrlp.vim.git
+	url = http://github.com/kien/ctrlp.vim.git
 [submodule "vim/vim/bundle/supertab"]
 	path = vim/vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
+	url = http://github.com/ervandew/supertab.git
 [submodule "vim/vim/pathogen"]
     path = vim/vim/pathogen
-    url = git://github.com/tpope/vim-pathogen.git
+    url = http://github.com/tpope/vim-pathogen.git
 [submodule "vim/vim/bundle/syntastic"]
 	path = vim/vim/bundle/syntastic
 	url = http://github.com/scrooloose/syntastic.git

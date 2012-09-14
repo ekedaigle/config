@@ -1,5 +1,6 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+call pathogen#infect()
 
 filetype plugin on
 set ruler
@@ -45,7 +46,7 @@ let Tlist_Exit_OnlyWindow=1
 
 set laststatus=2
 set encoding=utf-8
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'unicode'
 set t_Co=256
 
 " ============================ Key bindings ==================================

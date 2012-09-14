@@ -1,11 +1,12 @@
 def create_link(file_path, link_path):
-	failed = False
+	success = True
+
 	try:
 		os.symlink(file_path, link_path)
 	except OSError:
-		failed = True
+		success = False
 	
-	return failed
+	return success
 
 if __name__ == '__main__':
 	import sys, os

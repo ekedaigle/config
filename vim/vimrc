@@ -37,10 +37,10 @@ syntax enable
 set background=dark
 colorscheme solarized
 
-" ============================= Tag list =====================================
+" ============================= Tag Bar =====================================
 
-let Tlist_Auto_Open=1
-let Tlist_Exit_OnlyWindow=1
+let g:tagbar_usearrows = 1
+nnoremap <leader>l :TagbarToggle<CR>
 
 " ============================= Powerline ====================================
 

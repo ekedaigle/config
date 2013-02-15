@@ -49,6 +49,10 @@ set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 set t_Co=256
 
+" ============================= Cscope =======================================
+
+set nocscopeverbose
+
 " ============================ Key bindings ==================================
 
 imap jk <Esc>

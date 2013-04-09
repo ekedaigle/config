@@ -1,0 +1,5 @@
+[include]
+    path = .gitconfig-local
+
+[alias]
+    lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative

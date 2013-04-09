@@ -25,3 +25,6 @@
 [submodule "gnome-terminal-colors-solarized"]
 	path = gnome-terminal-colors-solarized
 	url = https://github.com/sigurdga/gnome-terminal-colors-solarized.git
+[submodule "vim/vim/bundle/a.vim"]
+	path = vim/vim/bundle/a.vim
+	url = http://github.com/vim-scripts/a.vim.git

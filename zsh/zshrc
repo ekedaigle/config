@@ -42,12 +42,11 @@ ZSH_THEME="eastwood"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
 
 # Configure command prompt
 #export PS1="%F{red}%n%f@%F{blue}%M%f:%F{magenta}%B%~%b%f$ "
 export EDITOR=vim
-
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/git/bin:/opt/local/bin:/opt/local/sbin
 
 # Set up aliases
 alias l='ls'
@@ -72,4 +71,5 @@ fi
 
 if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"
+
 fi

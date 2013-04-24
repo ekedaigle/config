@@ -16,6 +16,12 @@ set noswapfile
 set nobackup
 set nowb
 
+" ============================== wildmenu ====================================
+
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*~,*.pyc,*.pyo,*.so,*.sw*,__pycache__
+
 " ============================= Indentation ==================================
 
 set tabstop=4

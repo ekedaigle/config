@@ -1,10 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/ekern/srp/srp_server/deprecated'
-let g:netrw_dirhist_2='/home/ekern/srp/srp_server/vm_manager'
-let g:netrw_dirhist_3='/home/ekern/.pki/qemu'
-let g:netrw_dirhist_4='/home/ekern/.oh-my-zsh'
-let g:netrw_dirhist_5='/home/ekern/config/.git/modules'
-let g:netrw_dirhist_6='/home/ekern/config/.git/modules/vim'
-let g:netrw_dirhist_7='/home/ekern/config/.git/modules/vim/vim'
-let g:netrw_dirhist_8='/home/ekern/config/.git/modules/vim/vim/bundle'
+let g:netrw_dirhist_cnt =0

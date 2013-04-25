@@ -25,3 +25,6 @@
 [submodule "vim/vim/bundle/YouCompleteMe"]
 	path = vim/vim/bundle/YouCompleteMe
 	url = http://github.com/Valloric/YouCompleteMe.git
+[submodule "vim/vim/bundle/nerdcommenter"]
+	path = vim/vim/bundle/nerdcommenter
+	url = http://github.com/scrooloose/nerdcommenter.git

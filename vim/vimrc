@@ -9,6 +9,7 @@ set nohlsearch
 set backspace=2
 set guioptions-=T " turn the menu bar off
 set nocompatible
+set scrolloff=3
 
 " ============================= Swap files ===================================
 
@@ -76,7 +77,7 @@ let g:ycm_filetype_whitelist = {
 \       'c' : 1
 \   }
 
-nnoremap <leader>c :YcmForceCompileAndDiagnostics<CR>
+nnoremap <leader>f :YcmForceCompileAndDiagnostics<CR>
 
 " ================================= LaTeX ====================================
 

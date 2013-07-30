@@ -55,6 +55,8 @@ alias la='ls -a'
 alias cs='cscope -R'
 alias v='vim'
 alias ssh-r='ssh -R 17773:localhost:3128'
+alias hd='hexdump -C'
+alias m='make -j8'
 
 # make colors work properly in tmux
 alias tmux="TERM=screen-256color-bce tmux"

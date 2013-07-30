@@ -31,3 +31,9 @@
 [submodule "vim/vim/bundle/easymotion"]
 	path = vim/vim/bundle/easymotion
 	url = http://github.com/Lokaltog/vim-easymotion.git
+[submodule "vim/vim/bundle/unite"]
+	path = vim/vim/bundle/unite
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "vim/vim/bundle/vimproc"]
+	path = vim/vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git

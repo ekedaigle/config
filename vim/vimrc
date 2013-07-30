@@ -11,6 +11,9 @@ set guioptions-=T " turn the menu bar off
 set nocompatible
 set scrolloff=3
 
+set splitbelow
+set splitright
+
 " ============================= Swap files ===================================
 
 set noswapfile
@@ -67,6 +70,8 @@ imap kj <Esc>
 vnoremap < <gv
 vnoremap > >gv
 nnoremap Y y$
+nnoremap <leader>v :vs<CR>
+nnoremap <leader>s :split<CR>
 cmap w!! %!sudo tee > /dev/null %
 
 " ========================== YouCompleteMe ===================================
@@ -78,6 +83,11 @@ let g:ycm_filetype_whitelist = {
 \   }
 
 nnoremap <leader>f :YcmForceCompileAndDiagnostics<CR>
+
+" ============================= Unite ========================================
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <C-p> :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 
 " ================================= LaTeX ====================================
 

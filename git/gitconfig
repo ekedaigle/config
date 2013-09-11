@@ -13,3 +13,5 @@
 
 [push]
 	default = simple
+[http]
+	proxy = http://gatekeeper.mitre.org:80/

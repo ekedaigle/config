@@ -3,6 +3,7 @@
 
 [alias]
     lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lgf = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --first-parent
     file-diff = !sh -c 'git diff --name-status $(git merge-base $(git rev-parse --abbrev-ref HEAD) $1)' -
     this = !git init && git add . && git commit -m \"Initial commit\"
     unstage = reset HEAD --

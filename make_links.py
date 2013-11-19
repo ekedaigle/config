@@ -1,4 +1,5 @@
 LINKS = {
+        'clang-format' : '.clang-format',
         'colorgcc/colorgccrc' : '.colorgccrc',
         'git/gitconfig' : '.gitconfig',
         'tmux/tmux.conf' : '.tmux.conf',

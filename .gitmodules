@@ -1,0 +1,42 @@
+[submodule "vim/vim/bundle/fugitive"]
+	path = vim/vim/bundle/fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim/bundle/tagbar"]
+	path = vim/vim/bundle/tagbar
+	url = http://github.com/majutsushi/tagbar.git
+[submodule "vim/vim/bundle/solarized"]
+	path = vim/vim/bundle/solarized
+	url = http://github.com/altercation/vim-colors-solarized.git
+[submodule "vim/vim/bundle/vim-powerline"]
+	path = vim/vim/bundle/vim-powerline
+	url = http://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/vim/pathogen"]
+    path = vim/vim/pathogen
+    url = http://github.com/tpope/vim-pathogen.git
+[submodule "vim/vim/bundle/syntastic"]
+	path = vim/vim/bundle/syntastic
+	url = http://github.com/scrooloose/syntastic.git
+[submodule "zsh/oh-my-zsh"]
+	path = zsh/oh-my-zsh
+	url = http://github.com/robbyrussell/oh-my-zsh.git
+[submodule "vim/vim/bundle/a.vim"]
+	path = vim/vim/bundle/a.vim
+	url = http://github.com/vim-scripts/a.vim.git
+[submodule "vim/vim/bundle/YouCompleteMe"]
+	path = vim/vim/bundle/YouCompleteMe
+	url = http://github.com/Valloric/YouCompleteMe.git
+[submodule "vim/vim/bundle/nerdcommenter"]
+	path = vim/vim/bundle/nerdcommenter
+	url = http://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/vim/bundle/easymotion"]
+	path = vim/vim/bundle/easymotion
+	url = http://github.com/Lokaltog/vim-easymotion.git
+[submodule "vim/vim/bundle/unite"]
+	path = vim/vim/bundle/unite
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "vim/vim/bundle/vimproc"]
+	path = vim/vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "vim/vim/bundle/vimux"]
+	path = vim/vim/bundle/vimux
+	url = https://github.com/benmills/vimux.git

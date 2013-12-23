@@ -14,5 +14,6 @@
 
 [push]
 	default = simple
-[http]
-	proxy = http://gatekeeper.mitre.org:80/
+[user]
+	email = eakmeister@gmail.com
+	name = Eric Kern

@@ -44,6 +44,14 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
+function cfiles {
+    find -regextype posix-egrep -regex '.*\.h$|.*\.hpp$|.*\.c$|.*\.cpp|.*\.cc$'
+}
+
+function cgrep {
+    2>/dev/null grep -n "$@" $(cfiles) | nl | grep "$@"
+}
+
 # Configure command prompt
 #export PS1="%F{red}%n%f@%F{blue}%M%f:%F{magenta}%B%~%b%f$ "
 export EDITOR=vim
@@ -56,7 +64,6 @@ alias cs='cscope -R'
 alias v='vim'
 alias ssh-r='ssh -R 17773:localhost:3128'
 alias hd='hexdump -C'
-alias m='make -j8'
 
 # make colors work properly in tmux
 alias tmux="TERM=screen-256color-bce tmux"
@@ -67,11 +74,7 @@ elif [[ "$platform" == 'linux' ]]; then
 	alias ls='ls --color=auto'
 fi
 
-if [[ "$platform" == 'darwin' ]]; then
-	export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH:/Developer/usr/bin:~/Code/Scripts
-fi
-
 if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"
-
 fi
+

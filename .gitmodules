@@ -37,6 +37,9 @@
 [submodule "vim/vim/bundle/vimproc"]
 	path = vim/vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "gnome-terminal-colors-solarized"]
+	path = gnome-terminal-colors-solarized
+	url = git@github.com:sigurdga/gnome-terminal-colors-solarized.git
 [submodule "vim/vim/bundle/vimux"]
 	path = vim/vim/bundle/vimux
 	url = https://github.com/benmills/vimux.git

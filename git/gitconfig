@@ -14,3 +14,6 @@
 
 [push]
 	default = matching
+[user]
+	name = Eric Kern
+	email = ekern@mitre.org

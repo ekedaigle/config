@@ -43,6 +43,7 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
+unsetopt auto_cd
 
 function cfiles {
     find -regextype posix-egrep -regex '.*\.h$|.*\.hpp$|.*\.c$|.*\.cpp|.*\.cc$'
@@ -58,10 +59,10 @@ export EDITOR=vim
 
 # Set up aliases
 alias l='ls'
-alias ll='ls -l'
+alias ll='ls -lh'
 alias la='ls -a'
 alias cs='cscope -R'
-alias v='vim'
+alias vi='vim'
 alias ssh-r='ssh -R 17773:localhost:3128'
 alias hd='hexdump -C'
 

@@ -27,7 +27,6 @@ set wildmode=list:longest,full
 set wildignore=*.o,*~,*.pyc,*.pyo,*.so,*.sw*,__pycache__
 
 " ============================= Indentation ==================================
-
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -65,6 +64,7 @@ set nocscopeverbose
 
 " ============================ Key bindings ==================================
 
+let mapleader = "\<Space>"
 imap jk <Esc>
 imap kj <Esc>
 vnoremap < <gv
@@ -73,11 +73,45 @@ nnoremap Y y$
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>s :split<CR>
 nnoremap <leader>a :A<CR>
+nnoremap <leader>o :Unite file<CR>
+nnoremap <leader>u :Unite buffer<CR>
+nnoremap <leader>w :w<CR>
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
 cmap w!! %!sudo tee > /dev/null %
 
+augroup FiletypeBindings
+    autocmd BufEnter,BufRead * call s:FiletypeSpecificBindings(&filetype)
+augroup END
+
+function s:FiletypeSpecificBindings(filetype)
+    if a:filetype == "python"
+        nnoremap <leader>b :call PythonTogglePDB()<CR>
+    endif
+endfunction
+
+function! PythonTogglePDB()
+    let breakpoint = "import pdb; pdb.set_trace()"
+    let line = substitute(getline('.'), '^\s*\(.\{-}\)\s*$', '\1', '')
+
+    if line == breakpoint
+        :normal dd
+    else
+        :normal Oimport pdb; pdb.set_trace()
+    endif
+endfunction
+
 " ========================== clang-format ====================================
-map <leader>f :pyf ~/llvm/tools/clang/tools/clang-format/clang-format.py<CR>
-imap <leader>f <ESC>:pyf ~/llvm/tools/clang/tools/clang-format/clang-format.py<CR>i
+nnoremap <leader>f :pyf ~/llvm/tools/clang/tools/clang-format/clang-format.py<CR>
+
+" ============================ Syntastic =====================================
+" don't print style warnings
+let g:syntastic_quiet_messages = {"type" : "style" }
+let g:syntastic_python_checkers = ["python"]
 
 " ========================== YouCompleteMe ===================================
 

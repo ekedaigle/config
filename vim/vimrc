@@ -106,7 +106,7 @@ function! PythonTogglePDB()
 endfunction
 
 " ========================== clang-format ====================================
-nnoremap <leader>f :pyf ~/llvm/tools/clang/tools/clang-format/clang-format.py<CR>
+nnoremap <leader>f :pyf ~/config/vim/clang-format.py<CR>
 
 " ============================ Syntastic =====================================
 " don't print style warnings

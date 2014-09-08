@@ -19,6 +19,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/a.vim'
 Plugin 'llvm-syntax', {'pinned' : 1}
+Plugin 'armasm', {'pinned' : 1}
 
 call vundle#end()
 filetype plugin on
@@ -64,11 +65,6 @@ au! FileType python setl nosmartindent
 syntax enable
 set background=dark
 colorscheme solarized
-
-" ============================= Tag Bar =====================================
-
-let g:tagbar_usearrows = 1
-nnoremap <leader>l :TagbarToggle<CR>
 
 " ============================= Powerline ====================================
 
@@ -129,8 +125,12 @@ nnoremap <leader>f :pyf ~/config/vim/clang-format.py<CR>
 
 " ============================ Syntastic =====================================
 " don't print style warnings
-let g:syntastic_quiet_messages = {"type" : "style" }
-let g:syntastic_python_checkers = ["python"]
+let g:syntastic_python_pylint_quiet_messages = {"level" : "warning"}
+
+" ============================= Tag Bar =====================================
+
+let g:tagbar_usearrows = 1
+nnoremap <leader>l :TagbarToggle<CR>
 
 " ========================== YouCompleteMe ===================================
 

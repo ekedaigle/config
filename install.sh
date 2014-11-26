@@ -2,6 +2,17 @@
 
 base_dir=$(pwd)
 
+echo -n "Creating links..."
+ln -s "$base_dir/clang-format" ~/.clang-format
+ln -s "$base_dir/colorgcc/colorgcc" ~/.colorgcc
+ln -s "$base_dir/git/gitconfig" ~/.gitconfig
+ln -s "$base_dir/tmux/tmux.conf" ~/.tmux.conf
+ln -s "$base_dir/vim/vimrc" ~/.vimrc
+ln -s "$base_dir/vim/vim" ~/.vim
+ln -s "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
+ln -s "$base_dir/zsh/zshrc" ~/.zshrc
+echo "done"
+
 git submodule update --init
 
 if [ $? -ne 0 ]; then
@@ -125,8 +136,6 @@ command -v zsh >/dev/null 2>&1 || {
 
 cd $base_dir
 
-apt-get install clang-format
-
 vim +PluginInstall +qall
 
 cd $base_dir
@@ -146,14 +155,3 @@ if [ $? -ne 0 ]; then
 fi
 
 cd $base_dir
-
-echo -n "Creating links..."
-ln -s clang-format ~/.clang-format
-ln -s colorgcc/colorgcc ~/.colorgcc
-ln -s git/gitconfig ~/.gitconfig
-ln -s tmux/tmux.conf ~/.tmux.conf
-ln -s vim/vimrc ~/.vimrc
-ln -s vim/vim ~/.vim
-ln -s zsh/oh-my-zsh ~/.oh-my-zsh
-ln -s zsh/zshrc ~/.zshrc
-echo "done"

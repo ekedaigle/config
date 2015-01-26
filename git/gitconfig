@@ -17,3 +17,5 @@
 [user]
 	name = Eric Kern
 	email = ekern@mitre.org
+[url "https://github.com"]
+	insteadOf = git://github.com

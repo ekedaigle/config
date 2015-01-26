@@ -41,17 +41,17 @@ command -v tmux >/dev/null 2>&1 || {
 		rm -rf libevent-2.0.21-stable.tar.gz
 		cd libevent-2.0.21-stable
 
-		./configure --prefix=$HOME && {
+		./configure --prefix=$HOME || {
 			echo "libevent configure failed"
 			exit 1
         }
 
-		make && {
+		make || {
 			echo "libevent build failed"
 			exit 1
         }
 
-		make install && {
+		make install || {
 			echo "libevent install failed"
 			exit 1
         }
@@ -60,7 +60,7 @@ command -v tmux >/dev/null 2>&1 || {
 		cd $base_dir
     }
 
-	wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.8/tmux-1.8.tar.gz && {
+	wget http://downloads.sourceforge.net/project/tmux/tmux/tmux-1.8/tmux-1.8.tar.gz || {
 		echo "Failed to download tmux"
 		exit 1
     }
@@ -69,17 +69,17 @@ command -v tmux >/dev/null 2>&1 || {
 	rm -rf tmux-1.8.tar.gz
 	cd tmux-1.8
 
-	./configure --prefix=$HOME && {
+	./configure --prefix=$HOME || {
 		echo "Failed to configure tmux"
 		exit 1
     }
 
-	make && {
+	make || {
 		echo "Failed to build tmux"
 		exit 1
     }
 
-	make install && {
+	make install || {
 		echo "Failed to install tmux"
 		exit 1
     }
@@ -91,7 +91,7 @@ command -v tmux >/dev/null 2>&1 || {
 command -v zsh >/dev/null 2>&1 || {
 	echo "zsh not found, installing"
 	
-	wget http://downloads.sourceforge.net/project/zsh/zsh/5.0.2/zsh-5.0.2.tar.gz && {
+	wget http://downloads.sourceforge.net/project/zsh/zsh/5.0.2/zsh-5.0.2.tar.gz || {
 		echo "Error downloading zsh"
 		exit 1
     }
@@ -100,17 +100,17 @@ command -v zsh >/dev/null 2>&1 || {
 	rm -rf zsh-5.0.2.tar.gz
 	cd zsh-5.0.2
 
-	./configure --prefix=$HOME && {
+	./configure --prefix=$HOME || {
 		echo "zsh configure failed"
 		exit 1
     }
 
-	make && {
+	make || {
         echo "zsh build failed"
         exit 1
     }
 
-	make install && {
+	make install || {
 		echo "zsh install failed"
 		exit 1
     }
@@ -126,7 +126,7 @@ vim +PluginInstall +qall
 cd $base_dir/vim/vim/bundle/YouCompleteMe
 
 if [ ! -f third_party/ycmd/ycm_client_support.so ] || [ ! -f third_party/ycmd/ycm_core.so ]; then
-    ./install.sh --clang-completer && {
+    ./install.sh --clang-completer || {
         echo "YouCompleteMe build failed"
         exit 1
     }

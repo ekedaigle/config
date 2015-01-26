@@ -53,8 +53,6 @@ function cgrep {
     2>/dev/null grep -n "$@" $(cfiles) | nl | grep "$@"
 }
 
-# Configure command prompt
-#export PS1="%F{red}%n%f@%F{blue}%M%f:%F{magenta}%B%~%b%f$ "
 export EDITOR=vim
 
 # Set up aliases

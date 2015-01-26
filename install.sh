@@ -132,4 +132,11 @@ if [ ! -f third_party/ycmd/ycm_client_support.so ] || [ ! -f third_party/ycmd/yc
     }
 fi
 
+# hack for Arch/CentOS where libedit.so.2 does not exist
+cd $base_dir/vim/vim/bundle/YouCompleteMe/third_party/ycmd
+
+if [[ $(ldd libclang.so | grep libedit.so) == *"not found" ]]; then
+    ln -s /usr/lib64/libedit.so.0 libedit.so.2
+fi
+
 cd $base_dir

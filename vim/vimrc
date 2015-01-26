@@ -8,6 +8,7 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
+Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'majutsushi/tagbar'
@@ -140,6 +141,8 @@ let g:ycm_filetype_whitelist = {
 \       'python' : 1,
 \       'c' : 1
 \   }
+
+let g:ycm_confirm_extra_conf = 0
 
 nnoremap <leader>c :YcmForceCompileAndDiagnostics<CR>
 

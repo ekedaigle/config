@@ -13,7 +13,7 @@
     ui = auto
 
 [push]
-	default = upstream
+	default = tracking
 [user]
 	name = Eric Kern
 	email = ekern@mitre.org

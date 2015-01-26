@@ -4,13 +4,19 @@ base_dir=$(pwd)
 
 echo -n "Creating links..."
 ln -s "$base_dir/clang-format" ~/.clang-format
-ln -s "$base_dir/colorgcc/colorgcc" ~/.colorgcc
+ln -s "$base_dir/colorgcc/colorgccrc" ~/.colorgccrc
 ln -s "$base_dir/git/gitconfig" ~/.gitconfig
 ln -s "$base_dir/tmux/tmux.conf" ~/.tmux.conf
 ln -s "$base_dir/vim/vimrc" ~/.vimrc
 ln -s "$base_dir/vim/vim" ~/.vim
 ln -s "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
 ln -s "$base_dir/zsh/zshrc" ~/.zshrc
+
+mkdir -p ~/bin
+ln -s "$base_dir/colorgcc/colorgcc.pl" ~/bin/gcc
+ln -s "$base_dir/colorgcc/colorgcc.pl" ~/bin/g++
+ln -s "$base_dir/colorgcc/colorgcc.pl" ~/bin/c++
+ln -s "$base_dir/colorgcc/colorgcc.pl" ~/bin/cc
 echo "done"
 
 git submodule update --init

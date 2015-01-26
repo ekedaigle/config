@@ -57,6 +57,8 @@ function cgrep {
 #export PS1="%F{red}%n%f@%F{blue}%M%f:%F{magenta}%B%~%b%f$ "
 export EDITOR=vim
 
+export PATH=~/bin:$PATH
+
 # Set up aliases
 alias l='ls'
 alias ll='ls -lh'
@@ -67,7 +69,7 @@ alias ssh-r='ssh -R 17773:localhost:3128'
 alias hd='hexdump -C'
 
 # make colors work properly in tmux
-alias tmux="TERM=screen-256color-bce tmux"
+alias tmux="TERM=screen-256color tmux"
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'
@@ -79,4 +81,4 @@ if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"
 fi
 
-source ~/config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

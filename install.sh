@@ -15,6 +15,8 @@ ln -sf "$base_dir/git/gitconfig" ~/.gitconfig
 ln -sf "$base_dir/tmux/tmux.conf" ~/.tmux.conf
 ln -sf "$base_dir/vim/vimrc" ~/.vimrc
 ln -sf "$base_dir/vim/vim" ~/.vim
+ln -sf "$base_dir/vim/vimrc" ~/.nvimrc
+ln -sf "$base_dir/vim/vim" ~/.nvim
 ln -sf "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
 ln -sf "$base_dir/zsh/zshrc" ~/.zshrc
 echo "done"
@@ -139,4 +141,22 @@ if [[ $(ldd libclang.so | grep libedit.so) == *"not found" ]]; then
     ln -s /usr/lib64/libedit.so.0 libedit.so.2
 fi
 
-cd $base_dir
+command -v pip >/dev/null 2>&1 || {
+    echo "pip not found, installing"
+
+    wget https://bootstrap.pypa.io/get-pip.py || {
+        echo "Downloading pip bootstrap script failed"
+        exit 1
+    }
+
+    sudo -E python get-pip.py || {
+        echo "pip install failed"
+        exit 1
+    }
+}
+
+command -v nvim >/dev/null 2>&1 || {
+    cd $base_dir/neovim
+    make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME" install
+    sudo -E pip install neovim
+}

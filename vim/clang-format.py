@@ -21,7 +21,7 @@ import vim
 import subprocess
 
 # Change this to the full path if clang-format is not on the path.
-binary = 'clang-format-3.3'
+binary = 'clang-format'
 
 # Change this to format according to other formatting styles (see 
 # clang-format -help)

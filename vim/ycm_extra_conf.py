@@ -32,7 +32,7 @@ import ycm_core
 
 path_flags = [ '-isystem', '-I', '-iquote', '--sysroot=' ]
 
-ninja_file = 'build/build.ninja'
+ninja_file = '../cmake-build/build.ninja'
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
@@ -158,6 +158,8 @@ def FlagsForFile( filename, **kwargs ):
 
                     #flags = [fix_path(flag, os.path.dirname(ninja_file)) for flag in flags]
                     flags = MakeRelativePathsInFlagsAbsolute(flags, build_dir_abs)
+                    flags = [flag.replace('-I', '-isystem', 1)
+                            if flag.startswith('-I') else flag for flag in flags]
 
                     return {
                       'flags': flags,
@@ -166,4 +168,4 @@ def FlagsForFile( filename, **kwargs ):
         except StopIteration:
             pass
     
-    raise ValueError('Could not find file')
+    raise ValueError('Could not find file ' + filename)

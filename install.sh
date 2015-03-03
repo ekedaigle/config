@@ -161,8 +161,6 @@ command -v nvim >/dev/null 2>&1 || {
     sudo -E pip install neovim
 }
 
-sudo -E pip install BeautifulSoup
-
 command -v cowsay -h > /dev/null 2>&1 || {
     command -v brew > /dev/null 2>&1 && {
         brew install cowsay

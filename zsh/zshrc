@@ -83,7 +83,7 @@ precmd() {echo -ne "\e]0; $(hostname) \007"}
 
 # Welcome message
 if [[ $SHLVL -eq 1 ]]; then
-    $HOME/config/zsh/shower_thoughts.py | cowthink
+    $HOME/config/zsh/shower_thoughts.py 2>/dev/null | cowthink
 fi
 
 #source ~/config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

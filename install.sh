@@ -160,3 +160,20 @@ command -v nvim >/dev/null 2>&1 || {
     make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME" install
     sudo -E pip install neovim
 }
+
+sudo -E pip install BeautifulSoup
+
+command -v cowsay -h > /dev/null 2>&1 || {
+    command -v brew > /dev/null 2>&1 && {
+        brew install cowsay
+    }
+
+    command -v yum > /dev/null 2>&1 && {
+        sudo yum install cowsay
+    }
+
+    command -v apt-get > /dev/null 2>&1 && {
+        sudo apt-get install cowsay
+    }
+}
+

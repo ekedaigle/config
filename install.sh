@@ -19,6 +19,11 @@ ln -sf "$base_dir/vim/vimrc" ~/.nvimrc
 ln -sf "$base_dir/vim/vim" ~/.nvim
 ln -sf "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
 ln -sf "$base_dir/zsh/zshrc" ~/.zshrc
+
+if [ "$(uname)" = "Darwin" ]; then
+    ln -sf "$base_dir/tmux/tmux-osx.conf" ~/.tmux-osx.conf
+fi
+
 echo "done"
 
 git submodule update --init
@@ -137,7 +142,7 @@ fi
 # hack for Arch/CentOS where libedit.so.2 does not exist
 cd $base_dir/vim/vim/bundle/YouCompleteMe/third_party/ycmd
 
-if [[ $(ldd libclang.so | grep libedit.so) == *"not found" ]]; then
+if [ "$(uname)" = "Linux" ] && [[ $(ldd libclang.so | grep libedit.so) == *"not found" ]]; then
     ln -s /usr/lib64/libedit.so.0 libedit.so.2
 fi
 
@@ -161,17 +166,7 @@ command -v nvim >/dev/null 2>&1 || {
     sudo -E pip install neovim
 }
 
-command -v cowsay -h > /dev/null 2>&1 || {
-    command -v brew > /dev/null 2>&1 && {
-        brew install cowsay
-    }
-
-    command -v yum > /dev/null 2>&1 && {
-        sudo yum install cowsay
-    }
-
-    command -v apt-get > /dev/null 2>&1 && {
-        sudo apt-get install cowsay
-    }
-}
+if [ "$(uname)" = "Darwin" ]; then
+    brew install reattach-to-user-namespace
+fi
 

@@ -81,10 +81,11 @@ elif [[ "$platform" == 'linux' ]]; then
 	alias ls='ls --color=auto'
 fi
 
+echo -ne "\e]0; $(hostname) \007" 
+
 if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"
 fi
 
 precmd() {echo -ne "\e]0; $(hostname) \007"}
 
-#source ~/config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

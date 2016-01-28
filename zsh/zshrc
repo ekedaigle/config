@@ -55,7 +55,7 @@ function cgrep {
 
 export EDITOR=vim
 
-export PATH=~/bin:$PATH
+export PATH=/usr/lib/ccache:~/bin:$PATH
 
 # Set up aliases
 alias l='ls'
@@ -76,6 +76,8 @@ elif [[ "$platform" == 'linux' ]]; then
 fi
 
 echo -ne "\e]0; $(hostname) \007" 
+
+export CCACHE_CPP2=yes
 
 if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"

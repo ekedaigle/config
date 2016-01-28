@@ -53,6 +53,12 @@ function cgrep {
     2>/dev/null grep -n "$@" $(cfiles) | nl | grep "$@"
 }
 
+function update-env {
+    if [[ -n $TMUX ]]; then
+        DISPLAY=$(tmux showenv | grep ^DISPLAY | cut -d = -f 2)
+    fi
+}
+
 export EDITOR=vim
 
 export PATH=~/bin:$PATH
@@ -80,10 +86,5 @@ if [[ -e "$ZSH_LOCAL" ]]; then
 fi
 
 precmd() {echo -ne "\e]0; $(hostname) \007"}
-
-# Welcome message
-if [[ $SHLVL -eq 1 ]]; then
-    $HOME/config/zsh/shower_thoughts.py 2>/dev/null | cowthink
-fi
 
 #source ~/config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

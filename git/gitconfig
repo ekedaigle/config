@@ -15,7 +15,7 @@
 [push]
 	default = tracking
 [user]
-	name = Eric Kern
-	email = ekern@mitre.org
+	name = Eric Kedaigle
+	email = ekedaigle@mitre.org
 [url "https://github.com"]
 	insteadOf = git://github.com

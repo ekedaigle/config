@@ -53,6 +53,12 @@ function cgrep {
     2>/dev/null grep -n "$@" $(cfiles) | nl | grep "$@"
 }
 
+function update-env {
+    if [[ -n $TMUX ]]; then
+        DISPLAY=$(tmux showenv | grep ^DISPLAY | cut -d = -f 2)
+    fi
+}
+
 export EDITOR=vim
 
 export PATH=/usr/lib/ccache:~/bin:$PATH

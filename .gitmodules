@@ -11,3 +11,6 @@
 [submodule "neovim"]
 	path = neovim
 	url = https://github.com/neovim/neovim.git
+[submodule "vim/YCM-Generator"]
+	path = vim/YCM-Generator
+	url = https://github.com/rdnetto/YCM-Generator.git

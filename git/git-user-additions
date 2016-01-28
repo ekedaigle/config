@@ -1,0 +1,5 @@
+#!/bin/bash
+git stash show stash^{/USER_ADDITIONS} -p | git apply --reverse
+\git $@
+git stash apply stash^{/USER_ADDITIONS} > /dev/null 2>&1
+

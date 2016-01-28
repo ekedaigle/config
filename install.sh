@@ -12,6 +12,7 @@ ln -sf "$base_dir/colorgcc/colorgcc.pl" ~/bin/cc
 ln -sf "$base_dir/clang-format" ~/.clang-format
 ln -sf "$base_dir/colorgcc/colorgcc" ~/.colorgccrc
 ln -sf "$base_dir/git/gitconfig" ~/.gitconfig
+ln -sf "$base_dir/git/git_template" ~/.git_template
 ln -sf "$base_dir/tmux/tmux.conf" ~/.tmux.conf
 ln -sf "$base_dir/vim/vimrc" ~/.vimrc
 ln -sf "$base_dir/vim/vim" ~/.vim

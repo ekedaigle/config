@@ -1,5 +1,8 @@
+[init]
+templatedir = ~/.git_template
+
 [include]
-    path = .gitconfig-local
+    path = ~/.gitconfig-local
 
 [alias]
     lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -8,14 +11,19 @@
     this = !git init && git add . && git commit -m \"Initial commit\"
     unstage = reset HEAD --
     alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
+    ctags = !.git/hooks/ctags
 
 [color]
     ui = auto
 
+[core]
+    excludesfile = ~/.gitignore
+
 [push]
 	default = tracking
+
 [user]
-	name = Eric Kern
-	email = ekern@mitre.org
+    name = Eric Kedaigle
+
 [url "https://github.com"]
 	insteadOf = git://github.com

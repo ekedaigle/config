@@ -106,8 +106,7 @@ augroup END
 function s:FiletypeSpecificBindings(filetype)
     if a:filetype == "python"
         nnoremap <leader>b :call PythonTogglePDB()<CR>
-        nnoremap <leader>f :.!yapf<CR>
-        vnoremap <leader>f :!yapf<CR>
+        map <leader>f :pyf ~/python_format/python_format_vim.py<CR>
     elseif a:filetype == "c" || a:filetype == "cpp"
         " ================== clang-format ====================================
         map <leader>f :pyf ~/config/vim/clang-format.py<CR>

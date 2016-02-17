@@ -20,6 +20,7 @@ ln -sf "$base_dir/vim/vimrc" ~/.nvimrc
 ln -sf "$base_dir/vim/vim" ~/.nvim
 ln -sf "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
 ln -sf "$base_dir/zsh/zshrc" ~/.zshrc
+ln -sf "$base_dir/emacs/emacs" ~/.emacs
 
 if [ "$(uname)" = "Darwin" ]; then
     ln -sf "$base_dir/tmux/tmux-osx.conf" ~/.tmux-osx.conf

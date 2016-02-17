@@ -14,3 +14,6 @@
 [submodule "vim/YCM-Generator"]
 	path = vim/YCM-Generator
 	url = https://github.com/rdnetto/YCM-Generator.git
+[submodule "emacs/emacs-color-theme-solarized"]
+	path = emacs/emacs-color-theme-solarized
+	url = git@github.com:sellout/emacs-color-theme-solarized.git

@@ -69,11 +69,9 @@ alias ll='ls -lh'
 alias la='ls -a'
 alias cs='cscope -R'
 alias vi='vim'
+alias em="emacsclient -nw -a ''"
 alias ssh-r='ssh -R 17773:localhost:3128'
 alias hd='hexdump -C'
-
-# make colors work properly in tmux
-alias tmux="TERM=screen-256color tmux"
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'

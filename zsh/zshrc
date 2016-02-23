@@ -62,6 +62,7 @@ function update-env {
 export EDITOR=vim
 
 export PATH=/usr/lib/ccache:~/bin:$PATH
+export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
 
 # Set up aliases
 alias l='ls'
@@ -89,3 +90,6 @@ fi
 
 precmd() {echo -ne "\e]0; $(hostname) \007"}
 
+if [ -z $TMUX ]; then
+   tmux attach || tmux
+fi

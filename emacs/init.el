@@ -21,6 +21,9 @@
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(setq vc-follow-symlinks t)
+(setq scroll-conservatively 10000)
+(setq scroll-margin 3)
 
 (add-to-list 'custom-theme-load-path "~/config/emacs/emacs-color-theme-solarized")
 (set-frame-parameter nil 'background-mode 'dark)
@@ -42,11 +45,60 @@
 (use-package highlight-numbers
     :config
     (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+    
+(use-package company
+    :config
+    (add-hook 'after-init-hook 'global-company-mode))
+    
+(use-package company-irony
+    :config
+    (eval-after-load 'company
+	'(add-to-list 'company-backends 'company-irony)))
 
 (use-package jedi
     :config
     (add-hook 'python-mode-hook 'jedi:setup)
     (setq jedi:complete-on-dot t))
+    
+(use-package irony
+    :config
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+    (defun my-irony-mode-hook ()
+	(define-key irony-mode-map [remap completion-at-point]
+	    'irony-completion-at-point-async)
+	(define-key irony-mode-map [remap complete-symbol]
+	    'irony-completion-at-point-async))
+    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(use-package evil-nerd-commenter
+    :config
+    (evil-leader/set-key
+        "ci" 'evilnc-comment-or-uncomment-lines
+        "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+        "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+        "cc" 'evilnc-copy-and-comment-lines
+        "cp" 'evilnc-comment-or-uncomment-paragraphs
+        "cr" 'comment-or-uncomment-region
+        "cv" 'evilnc-toggle-invert-comment-line-by-line
+        "\\" 'evilnc-comment-operator ; if you prefer backslash key
+    )   
+)
+    
+(defun my-c-mode-common-hook()
+    (setq tab-width 4)
+    (setq c-basic-offset 4)
+    (setq c-indent-level 4)
+    
+    ; make underscore part of words
+    (modify-syntax-entry ?_ "w")
+)
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+; use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

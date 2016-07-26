@@ -69,7 +69,7 @@ alias l='ls'
 alias ll='ls -lh'
 alias la='ls -a'
 alias cs='cscope -R'
-alias vi='vim'
+alias vi='vim -X'
 alias em="emacsclient -nw -a ''"
 alias ssh-r='ssh -R 17773:localhost:3128'
 alias hd='hexdump -C'
@@ -93,3 +93,4 @@ precmd() {echo -ne "\e]0; $(hostname) \007"}
 if [ -z $TMUX ]; then
    tmux attach || tmux
 fi
+

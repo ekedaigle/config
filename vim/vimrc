@@ -12,18 +12,23 @@ Plugin 'eakmeister/vim-gitmodeline'
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'junegunn/fzf', {'dir' : '~/config/fzf', 'do': './install --all'}
+Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/a.vim'
 Plugin 'wting/rust.vim'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
 "Plugin 'test', {'pinned' : 1}
+
+let ycm_file = findfile('.ycm_extra_conf.py', ';')
+if !empty(ycm_file)
+    Plugin 'Valloric/YouCompleteMe'
+endif
 
 call vundle#end()
 filetype plugin on
@@ -92,9 +97,8 @@ nnoremap Y y$
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>s :split<CR>
 nnoremap <leader>a :A<CR>
-nnoremap <leader>o :Unite file<CR>
-nnoremap <leader>u :Unite buffer<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>o :FZF<CR>
 vmap <leader>y "+y
 vmap <leader>d "+d
 cmap w!! %!sudo tee > /dev/null %
@@ -145,11 +149,6 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 nnoremap <leader>c :YcmForceCompileAndDiagnostics<CR>
-
-" ============================= Unite ========================================
-
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <C-p> :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 
 " ================================= LaTeX ====================================
 

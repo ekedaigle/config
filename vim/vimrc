@@ -182,3 +182,8 @@ augroup END
 augroup filetype
     au! BufRead,BufNewFile *.td     set filetype=tablegen
 augroup END
+
+" =============================== a.vim ======================================
+let g:alternateExtensions_cc = "inc,h,H,HPP,hpp,hh"
+let g:alternateExtensions_hh = "cc,cpp,cxx,c"
+

@@ -59,6 +59,16 @@ function update-env {
     fi
 }
 
+function build-current-dir {
+    if [ -d build ]; then
+        cd build && build-current-dir $@ && cd ..
+    elif [ -e Makefile ]; then
+        make $@
+    elif [ -e build.ninja ]; then
+        ninja $@
+    fi
+}
+
 export EDITOR=vim
 
 export PATH=/usr/lib/ccache:~/bin:$PATH
@@ -73,6 +83,7 @@ alias vi='vim -X'
 alias em="emacsclient -nw -a ''"
 alias ssh-r='ssh -R 17773:localhost:3128'
 alias hd='hexdump -C'
+alias b=build-current-dir
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'

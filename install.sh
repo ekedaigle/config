@@ -5,21 +5,21 @@ base_dir=$(pwd)
 echo -n "Creating links..."
 
 mkdir -p ~/bin
-ln -sf "$base_dir/colorgcc/colorgcc.pl" ~/bin/gcc
-ln -sf "$base_dir/colorgcc/colorgcc.pl" ~/bin/g++
-ln -sf "$base_dir/colorgcc/colorgcc.pl" ~/bin/c++
-ln -sf "$base_dir/colorgcc/colorgcc.pl" ~/bin/cc
-ln -sf "$base_dir/clang-format" ~/.clang-format
-ln -sf "$base_dir/colorgcc/colorgcc" ~/.colorgccrc
-ln -sf "$base_dir/git/gitconfig" ~/.gitconfig
-ln -sf "$base_dir/git/git_template" ~/.git_template
-ln -sf "$base_dir/tmux/tmux.conf" ~/.tmux.conf
-ln -sf "$base_dir/vim/vimrc" ~/.vimrc
-ln -sf "$base_dir/vim/vim" ~/.vim
-ln -sf "$base_dir/vim/vimrc" ~/.nvimrc
-ln -sf "$base_dir/vim/vim" ~/.nvim
-ln -sf "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
-ln -sf "$base_dir/zsh/zshrc" ~/.zshrc
+ln -sfn "$base_dir/colorgcc/colorgcc.pl" ~/bin/gcc
+ln -sfn "$base_dir/colorgcc/colorgcc.pl" ~/bin/g++
+ln -sfn "$base_dir/colorgcc/colorgcc.pl" ~/bin/c++
+ln -sfn "$base_dir/colorgcc/colorgcc.pl" ~/bin/cc
+ln -sfn "$base_dir/clang-format" ~/.clang-format
+ln -sfn "$base_dir/colorgcc/colorgcc" ~/.colorgccrc
+ln -sfn "$base_dir/git/gitconfig" ~/.gitconfig
+ln -sfn "$base_dir/git/git_template" ~/.git_template
+ln -sfn "$base_dir/tmux/tmux.conf" ~/.tmux.conf
+ln -sfn "$base_dir/vim/vimrc" ~/.vimrc
+ln -sfn "$base_dir/vim/vim" ~/.vim
+ln -sfn "$base_dir/vim/vimrc" ~/.nvimrc
+ln -sfn "$base_dir/vim/vim" ~/.nvim
+ln -sfn "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
+ln -sfn "$base_dir/zsh/zshrc" ~/.zshrc
 
 if [ "$(uname)" = "Darwin" ]; then
     ln -sf "$base_dir/tmux/tmux-osx.conf" ~/.tmux-osx.conf

@@ -161,13 +161,10 @@ command -v pip >/dev/null 2>&1 || {
     }
 }
 
-command -v nvim >/dev/null 2>&1 || {
-    cd $base_dir/neovim
-    make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME" install
-    sudo -E pip install neovim
-}
-
 if [ "$(uname)" = "Darwin" ]; then
     brew install reattach-to-user-namespace
 fi
+
+# install fzf
+$base_dir/fzf/install --all
 

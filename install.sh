@@ -20,6 +20,9 @@ ln -sfn "$base_dir/vim/vimrc" ~/.nvimrc
 ln -sfn "$base_dir/vim/vim" ~/.nvim
 ln -sfn "$base_dir/zsh/oh-my-zsh" ~/.oh-my-zsh
 ln -sfn "$base_dir/zsh/zshrc" ~/.zshrc
+for filename in $base_dir/bin/*; do
+    ln -sfn "$filename" ~/bin/"${filename##*/}"
+done
 
 if [ "$(uname)" = "Darwin" ]; then
     ln -sf "$base_dir/tmux/tmux-osx.conf" ~/.tmux-osx.conf

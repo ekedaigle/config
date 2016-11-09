@@ -12,6 +12,7 @@ templatedir = ~/.git_template
     unstage = reset HEAD --
     alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
     ctags = !.git/hooks/ctags
+    pushu = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
 
 [color]
     ui = auto

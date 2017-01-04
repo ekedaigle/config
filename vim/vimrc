@@ -98,7 +98,8 @@ nnoremap <leader>v :vs<CR>
 nnoremap <leader>s :split<CR>
 nnoremap <leader>a :A<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <leader>o :FZF<CR>
+nnoremap <leader>o :Files<CR>
+nnoremap <leader>u :Buffers<CR>
 vmap <leader>y "+y
 vmap <leader>d "+d
 cmap w!! %!sudo tee > /dev/null %

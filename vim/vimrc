@@ -18,17 +18,14 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/a.vim'
 Plugin 'wting/rust.vim'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
-"Plugin 'test', {'pinned' : 1}
-
-let ycm_file = findfile('.ycm_extra_conf.py', ';')
-if !empty(ycm_file)
-    Plugin 'Valloric/YouCompleteMe'
-endif
 
 call vundle#end()
 filetype plugin on
@@ -39,6 +36,7 @@ set nohlsearch
 set backspace=2
 set guioptions-=T " turn the menu bar off
 set scrolloff=3
+set modeline
 
 set splitbelow
 set splitright
@@ -111,14 +109,16 @@ augroup END
 function s:FiletypeSpecificBindings(filetype)
     if a:filetype == "python"
         nnoremap <leader>b :call PythonTogglePDB()<CR>
-        map <leader>f :pyf ~/python_format/python_format_vim.py<CR>
+        "map <leader>f :py3f ~/python_format/python_format_vim.py<CR>
+        nnoremap <leader>f :call yapf#YAPF()<CR>
+        vnoremap <leader>f :'<,'>call yapf#YAPF()<CR>
     elseif a:filetype == "c" || a:filetype == "cpp"
         " ================== clang-format ====================================
-        map <leader>f :pyf ~/config/vim/clang-format.py<CR>
+        map <leader>f :py3f ~/config/vim/clang-format.py<CR>
     endif
 endfunction
 
-function! PythonTogglePDB()
+function PythonTogglePDB()
     let breakpoint = "import pdb; pdb.set_trace()"
     let line = substitute(getline('.'), '^\s*\(.\{-}\)\s*$', '\1', '')
 
@@ -131,7 +131,7 @@ endfunction
 
 " ============================ Syntastic =====================================
 " don't print style warnings
-let g:syntastic_python_pylint_quiet_messages = {"level" : "warning"}
+"let g:syntastic_python_pylint_quiet_messages = {"level" : "warning"}
 
 " ============================= Tag Bar ======================================
 
@@ -186,4 +186,34 @@ augroup END
 " =============================== a.vim ======================================
 let g:alternateExtensions_cc = "inc,h,H,HPP,hpp,hh"
 let g:alternateExtensions_hh = "cc,cpp,cxx,c"
+
+" ============================== sessions ====================================
+
+function s:SessionOnEnter()
+    let l:pid = getpid()
+    let l:ppid = system('cut -f4 -d" " /proc/' . l:pid . '/stat')[0:-2]
+    let g:vim_session_file = '.vim_session.' . l:ppid
+
+    if argc() == 0 && filereadable(g:vim_session_file)
+        exec ':source ' g:vim_session_file
+    endif
+
+    exec ':Obsession ' g:vim_session_file
+    let g:detach_session = 0
+endfunction
+
+function s:SessionOnExit()
+    if g:detach_session == 0
+        call delete(g:vim_session_file)
+    endif
+endfunction
+
+function DetachSession()
+    let g:detach_session = 1
+    :qa
+endfunction
+
+autocmd VimEnter * nested call s:SessionOnEnter()
+autocmd VimLeave * call s:SessionOnExit()
+nnoremap <leader>q :call DetachSession()<CR>
 

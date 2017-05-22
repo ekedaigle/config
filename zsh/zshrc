@@ -61,7 +61,9 @@ function update-env {
 
 function build-current-dir {
     if [ -d build ]; then
-        cd build && build-current-dir $@ && cd ..
+        cd build
+        build-current-dir $@
+        cd ..
     elif [ -e Makefile ]; then
         make $@
     elif [ -e build.ninja ]; then

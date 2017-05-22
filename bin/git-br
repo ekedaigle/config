@@ -1,5 +1,5 @@
 #!/bin/bash
-git branch | sed s/^..// | while read k; do
+git branch $* | sed s/^..// | while read k; do
     if ! [[ "$k" == "(HEAD detached at"* ]]; then
         echo -e `git log -1 --pretty=format:"%Cgreen%cd%Creset" --date=short "$k" --`\ "$k"
     fi

@@ -191,7 +191,13 @@ let g:alternateExtensions_hh = "cc,cpp,cxx,c"
 
 function s:SessionOnEnter()
     let l:pid = getpid()
-    let l:ppid = system('cut -f4 -d" " /proc/' . l:pid . '/stat')[0:-2]
+
+    if system('uname -s') == "Darwin\n"
+        let l:ppid = system('ps aux -o ppid | grep ' . l:pid . ' | grep vim | rev | cut -d" " -f1 | rev')
+    else
+        let l:ppid = system('cut -f4 -d" " /proc/' . l:pid . '/stat')[0:-2]
+    endif
+
     let g:vim_session_file = '.vim_session.' . l:ppid
 
     if argc() == 0 && filereadable(g:vim_session_file)

@@ -45,48 +45,13 @@ session_name=$(tmux display-message -p "#{session_name}")
 session_group=$(tmux display-message -p "#{session_group}")
 edge=$(pane_at_edge $direction)
 
-if [ ! $(grep linked <<< "$session_name") ] ||
-    [ $direction = "U" ] || [ $direction = "D" ] ||
-    [ "$edge" = 0 ]; then
+if [ $direction = "U" ] || [ $direction = "D" ] || [ "$edge" = 0 ]; then
     tmux select-pane "-$direction"
 elif [ "$edge" = 1 ]; then
-    linked_index=${session_name:6:6}
-    min_name=$(tmux list-sessions | grep linked | head -n 1 | cut -d : -f 1)
-    max_name=$(tmux list-sessions | grep linked | tail -n 1 | cut -d : -f 1)
-    min_index=${min_name:6:6}
-    max_index=${max_name:6:6}
-
     case "$direction" in
-        "L") op='-';;
-        "R") op='+';;
+        "L") echo "TMUX L" | nc localhost 3128 ;;
+        "R") echo "TMUX R" | nc localhost 3128 ;;
     esac
-
-    new_index=$(($linked_index $op 1))
-
-    if [ "$new_index" -gt "$max_index" ]; then
-        new_index=$min_index
-    elif [ "$new_index" -lt "$min_index" ]; then
-        new_index=$max_index
-    fi
-
-    new_name="linked$new_index"
-    new_tty=$(tmux list-clients | grep $new_name | cut -d : -f 1)
-
-    APPLESCRIPT="
-    tell application \"iTerm\"
-        activate
-        repeat with aWindow in windows
-            set aTTY to tty of current session of aWindow
-            
-            if aTTY is equal to \"$new_tty\" then
-                select aWindow
-                exit repeat
-            end if
-        end repeat
-    end tell
-    "
-
-    echo "$APPLESCRIPT" | osascript
 else
     tmux display wat
 fi

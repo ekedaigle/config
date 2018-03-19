@@ -82,8 +82,7 @@ alias ll='ls -lh'
 alias la='ls -a'
 alias cs='cscope -R'
 alias vi='vim -X'
-alias em="emacsclient -nw -a ''"
-alias ssh-r='ssh -R 17773:localhost:3128'
+alias ssh-r='ssh -R 3128:localhost:3128'
 alias hd='hexdump -C'
 alias b=build-current-dir
 
@@ -102,10 +101,6 @@ if [[ -e "$ZSH_LOCAL" ]]; then
 fi
 
 precmd() {echo -ne "\e]0; $(hostname) \007"}
-
-if [ -z $TMUX ]; then
-   tmux attach || tmux
-fi
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# check for xpra
+if type xpra > /dev/null; then
+    TMUX_SESSION=$(echo $TMUX | sed 's/.*,[0-9]\+,\([0-9]\+\)/\1/g')
+    export DISPLAY=:$((100+$TMUX_SESSION))
+    xpra start $DISPLAY
+fi

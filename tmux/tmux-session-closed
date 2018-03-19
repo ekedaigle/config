@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# check for xpra
+if type xpra > /dev/null; then
+    echo $DISPLAY > ~/test_tmux_session_closed
+    xpra stop $DISPLAY
+fi

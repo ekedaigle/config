@@ -60,7 +60,7 @@ function update-env {
 }
 
 function build-current-dir {
-    if [ -d build ]; then
+    if [ -e CMakeLists.txt ] && [ -d build ]; then
         cd build
         build-current-dir $@
         cd ..
@@ -68,6 +68,10 @@ function build-current-dir {
         make $@
     elif [ -e build.ninja ]; then
         ninja $@
+    elif [ -e SConstruct ]; then
+        scons $@
+    else
+        echo "Build system not found" >&2
     fi
 }
 
@@ -97,15 +101,15 @@ echo -ne "\e]0; $(hostname) \007"
 
 export CCACHE_CPP2=yes
 
+# Make git tab completion faster, at the expense of being a bit less smart
+__git_files () { 
+        _wanted files expl 'local files' _files     
+}
+
 if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"
 fi
 
 precmd() {echo -ne "\e]0; $(hostname) \007"}
-
-if [ -z $TMUX ]; then
-   tmux attach || tmux
-fi
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

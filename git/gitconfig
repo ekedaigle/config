@@ -1,5 +1,5 @@
 [init]
-templatedir = ~/.git_template
+    templatedir = ~/.git_template
 
 [include]
     path = ~/.gitconfig-local
@@ -7,6 +7,7 @@ templatedir = ~/.git_template
 [alias]
     lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lgf = log --first-parent --pretty=medium --decorate
+    lga = log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative HEAD master origin/master
     file-diff = !sh -c 'git diff --name-status $(git merge-base $(git rev-parse --abbrev-ref HEAD) $1)' -
     this = !git init && git add . && git commit -m \"Initial commit\"
     unstage = reset HEAD --
@@ -17,8 +18,27 @@ templatedir = ~/.git_template
 [color]
     ui = auto
 
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
 [core]
+    attributesfile = ~/.gitattributes
     excludesfile = ~/.gitignore
+    pager = "diff-so-fancy | less --tabs=4 -RFX"
+
+[diff "gitconfig"]
+    xfuncname = "^\\[(.+)\\]"
 
 [push]
 	default = tracking
@@ -28,3 +48,19 @@ templatedir = ~/.git_template
 
 [url "https://github.com"]
 	insteadOf = git://github.com
+
+[filter "nbstrip_full"]
+    clean = "jq --indent 1 \
+            '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+            | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+            | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+            | .cells[].metadata = {} \
+            '"
+    smudge = cat
+    required = true
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

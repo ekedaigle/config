@@ -6,16 +6,16 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'eakmeister/vim-gitmodeline'
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'junegunn/fzf', {'dir' : '~/config/fzf', 'do': './install --all'}
 Plugin 'junegunn/fzf.vim'
 Plugin 'kana/vim-fakeclip'
 Plugin 'majutsushi/tagbar'
+Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'sfiera/vim-emacsmodeline'
@@ -23,6 +23,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/a.vim'
 Plugin 'wting/rust.vim'
@@ -73,7 +74,7 @@ au! FileType python setl nosmartindent
 
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
 " ============================= Powerline ====================================
 
@@ -224,4 +225,3 @@ endfunction
 autocmd VimEnter * nested call s:SessionOnEnter()
 autocmd VimLeave * call s:SessionOnExit()
 nnoremap <leader>q :call DetachSession()<CR>
-

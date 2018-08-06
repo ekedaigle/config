@@ -55,7 +55,7 @@ function cgrep {
 
 function update-env {
     if [[ -n $TMUX ]]; then
-        DISPLAY=$(tmux showenv | grep ^DISPLAY | cut -d = -f 2)
+        export DISPLAY=$(tmux showenv | grep ^DISPLAY | cut -d = -f 2)
     fi
 }
 
@@ -75,7 +75,15 @@ function build-current-dir {
     fi
 }
 
-export EDITOR=vim
+function tmux-attach {
+    if [[ "$(echo $SSH_CLIENT | cut -d ' ' -f 1 | nslookup | grep 'name = ' | sed 's/.*name = \(.*\)\./\1/')" == "mm237133-pc.mitre.org" ]]; then
+        tmux -CC attach -d
+    else
+        tmux attach -d
+    fi
+}
+
+export EDITOR=nvim
 
 export PATH=/usr/lib/ccache:~/bin:$PATH
 export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
@@ -85,10 +93,11 @@ alias l='ls'
 alias ll='ls -lh'
 alias la='ls -a'
 alias cs='cscope -R'
-alias vi='vim -X'
+alias vi='nvim'
 alias ssh-r='ssh -R 3128:localhost:3128'
 alias hd='hexdump -C'
 alias b=build-current-dir
+alias ta=tmux-attach
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'

@@ -9,6 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'eakmeister/vim-gitmodeline'
+Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Lokaltog/vim-powerline'
@@ -17,15 +18,18 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'kana/vim-fakeclip'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'sfiera/vim-emacsmodeline'
+Plugin 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plugin 'Shougo/vimproc.vim'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/a.vim'
+Plugin 'w0rp/ale'
 Plugin 'wting/rust.vim'
+Plugin 'zchee/deoplete-clang'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
 
@@ -111,7 +115,6 @@ augroup END
 function s:FiletypeSpecificBindings(filetype)
     if a:filetype == "python"
         nnoremap <leader>b :call PythonTogglePDB()<CR>
-        "map <leader>f :py3f ~/python_format/python_format_vim.py<CR>
         nnoremap <leader>f :call yapf#YAPF()<CR>
         vnoremap <leader>f :'<,'>call yapf#YAPF()<CR>
     elseif a:filetype == "c" || a:filetype == "cpp"
@@ -153,6 +156,21 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 nnoremap <leader>c :YcmForceCompileAndDiagnostics<CR>
 
+" ================================ deoplete ==================================
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = "/usr/local/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header = "/usr/local/lib/clang"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ neocomplete#start_manual_complete()
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
 " ================================= LaTeX ====================================
 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
@@ -188,6 +206,9 @@ augroup END
 " =============================== a.vim ======================================
 let g:alternateExtensions_cc = "inc,h,H,HPP,hpp,hh"
 let g:alternateExtensions_hh = "cc,cpp,cxx,c"
+au VimEnter * iunmap <leader>ih
+au VimEnter * iunmap <leader>is
+au VimEnter * iunmap <leader>ihn
 
 " ============================== sessions ====================================
 

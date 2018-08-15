@@ -76,10 +76,28 @@ function build-current-dir {
 }
 
 function tmux-attach {
+    if [[ $# == 0 ]] && [[ $(tmux list-sessions | wc -l) > 1 ]]; then
+        tmux list-sessions
+        return
+    fi
+
     if [[ "$(echo $SSH_CLIENT | cut -d ' ' -f 1 | nslookup | grep 'name = ' | sed 's/.*name = \(.*\)\./\1/')" == "mm237133-pc.mitre.org" ]]; then
-        tmux -CC attach -d
+        tmux -CC attach -d -t $@
     else
-        tmux attach -d
+        tmux attach -d -t $@
+    fi
+}
+
+function tmux-new {
+    if [[ $# == 0 ]]; then
+        echo 'Please provide a session name'
+        return
+    fi
+
+    if [[ "$(echo $SSH_CLIENT | cut -d ' ' -f 1 | nslookup | grep 'name = ' | sed 's/.*name = \(.*\)\./\1/')" == "mm237133-pc.mitre.org" ]]; then
+        tmux -CC new-session -s $@
+    else
+        tmux new-session -s $@
     fi
 }
 
@@ -98,14 +116,13 @@ alias ssh-r='ssh -R 3128:localhost:3128'
 alias hd='hexdump -C'
 alias b=build-current-dir
 alias ta=tmux-attach
+alias tn=tmux-new
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'
 elif [[ "$platform" == 'linux' ]]; then
 	alias ls='ls --color=auto'
 fi
-
-echo -ne "\e]0; $(hostname) \007" 
 
 export CCACHE_CPP2=yes
 
@@ -118,6 +135,10 @@ if [[ -e "$ZSH_LOCAL" ]]; then
     source "$ZSH_LOCAL"
 fi
 
-precmd() {echo -ne "\e]0; $(hostname) \007"}
+if [[ -n $TMUX ]]; then
+    precmd() {tmux rename-window "$(hostname) - $(tmux display-message -p '#S')"}
+else
+    precmd() {echo -ne "\e]0; $(hostname) \007"}
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

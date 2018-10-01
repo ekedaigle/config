@@ -10,6 +10,7 @@ Plugin 'benmills/vimux'
 Plugin 'eakmeister/vim-gitmodeline'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
+Plugin 'honza/vim-snippets'
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-airline/vim-airline'
@@ -23,6 +24,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'sfiera/vim-emacsmodeline'
 Plugin 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plugin 'Shougo/vimproc.vim'
+Plugin 'SirVer/ultisnips'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
@@ -252,3 +254,11 @@ endfunction
 autocmd VimEnter * nested call s:SessionOnEnter()
 autocmd VimLeave * call s:SessionOnExit()
 nnoremap <leader>q :call DetachSession()<CR>
+
+" ============================== UltiSnips ====================================
+
+let g:UltiSnipsExpandTrigger='<c-s>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+let g:UltiSnipsEditSplit='context'
+

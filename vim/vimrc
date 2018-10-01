@@ -8,6 +8,7 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'benmills/vimux'
 Plugin 'eakmeister/vim-gitmodeline'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
@@ -26,7 +27,6 @@ Plugin 'tell-k/vim-autopep8'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/a.vim'
 Plugin 'w0rp/ale'
 Plugin 'wting/rust.vim'
 Plugin 'zchee/deoplete-clang'
@@ -46,6 +46,9 @@ set modeline
 
 set splitbelow
 set splitright
+
+set exrc
+set secure
 
 " ============================= Swap files ===================================
 
@@ -133,6 +136,10 @@ function PythonTogglePDB()
         :normal Oimport pdb; pdb.set_trace()
     endif
 endfunction
+
+" ============================= FSwitch ======================================
+" map :A to :FSHere
+cnoreabbrev A FSHere
 
 " ============================ Syntastic =====================================
 " don't print style warnings

@@ -1,7 +1,6 @@
-set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
@@ -56,7 +55,7 @@ set secure
 
 set noswapfile
 set nobackup
-set nowb
+set nowritebackup
 
 " ============================== wildmenu ====================================
 
@@ -76,7 +75,9 @@ filetype indent on
 
 " Don't set smart indent for python files
 set smartindent
-au! FileType python setl nosmartindent
+augroup FiletypeBindings
+    au! FileType python setl nosmartindent
+augroup END
 
 " ============================= Colorscheme ==================================
 
@@ -128,24 +129,26 @@ augroup FiletypeBindings
 augroup END
 
 function s:FiletypeSpecificBindings(filetype)
-    if a:filetype == "python"
+    if a:filetype ==# 'python'
         nnoremap <leader>b :call PythonTogglePDB()<CR>
         nnoremap <leader>f :call yapf#YAPF()<CR>
         vnoremap <leader>f :'<,'>call yapf#YAPF()<CR>
-    elseif a:filetype == "c" || a:filetype == "cpp"
+    elseif a:filetype ==# 'c' || a:filetype ==# 'cpp'
         " ================== clang-format ====================================
         map <leader>f :py3f ~/config/vim/clang-format.py<CR>
     endif
 endfunction
 
 function PythonTogglePDB()
-    let breakpoint = "import pdb; pdb.set_trace()"
+    let breakpoint = 'import pdb; pdb.set_trace()'
     let line = substitute(getline('.'), '^\s*\(.\{-}\)\s*$', '\1', '')
 
-    if line == breakpoint
-        :normal dd
+    if line ==# breakpoint
+        :d
     else
-        :normal Oimport pdb; pdb.set_trace()
+        ":normal Oimport pdb; pdb.set_trace()
+        ":insert breakpoint
+        call append(line('.')-1, breakpoint)
     endif
 endfunction
 
@@ -178,8 +181,8 @@ nnoremap <leader>c :YcmForceCompileAndDiagnostics<CR>
 " ================================ deoplete ==================================
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = "/usr/local/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = "/usr/local/lib/clang"
+let g:deoplete#sources#clang#libclang_path = '/usr/local/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/local/lib/clang'
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -187,7 +190,7 @@ inoremap <silent><expr> <TAB>
       \ neocomplete#start_manual_complete()
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction"}}}
 
 " ================================= LaTeX ====================================
@@ -214,27 +217,20 @@ let g:tex_flavor='latex'
 
 " ============================== LLVM Syntax =================================
 
-augroup filetype
+augroup FiletypeBindings
     au! BufRead,BufNewFile *.ll     set filetype=llvm
 augroup END
 
-augroup filetype
+augroup FiletypeBindings
     au! BufRead,BufNewFile *.td     set filetype=tablegen
 augroup END
-
-" =============================== a.vim ======================================
-let g:alternateExtensions_cc = "inc,h,H,HPP,hpp,hh"
-let g:alternateExtensions_hh = "cc,cpp,cxx,c"
-au VimEnter * iunmap <leader>ih
-au VimEnter * iunmap <leader>is
-au VimEnter * iunmap <leader>ihn
 
 " ============================== sessions ====================================
 
 function s:SessionOnEnter()
     let l:pid = getpid()
 
-    if system('uname -s') == "Darwin\n"
+    if system('uname -s') ==# "Darwin\n"
         let l:ppid = system('ps aux -o ppid | grep ' . l:pid . ' | grep vim | rev | cut -d" " -f1 | rev')
     else
         let l:ppid = system('cut -f4 -d" " /proc/' . l:pid . '/stat')[0:-2]
@@ -261,8 +257,10 @@ function DetachSession()
     :qa
 endfunction
 
-autocmd VimEnter * nested call s:SessionOnEnter()
-autocmd VimLeave * call s:SessionOnExit()
+augroup SessionBindings
+    autocmd VimEnter * nested call s:SessionOnEnter()
+    autocmd VimLeave * call s:SessionOnExit()
+augroup END
 nnoremap <leader>q :call DetachSession()<CR>
 
 " ============================== UltiSnips ====================================

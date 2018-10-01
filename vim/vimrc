@@ -13,7 +13,6 @@ Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
 Plugin 'honza/vim-snippets'
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'vim-airline/vim-airline'
 Plugin 'junegunn/fzf', {'dir' : '~/config/fzf', 'do': './install --all'}
 Plugin 'junegunn/fzf.vim'
 Plugin 'kana/vim-fakeclip'
@@ -29,6 +28,7 @@ Plugin 'tell-k/vim-autopep8'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
 Plugin 'w0rp/ale'
 Plugin 'wting/rust.vim'
 Plugin 'zchee/deoplete-clang'
@@ -90,6 +90,16 @@ set laststatus=2
 set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 set t_Co=256
+
+" ============================= Airline ======================================
+let g:airline_section_x = '' " don't show filetype
+let g:airline_section_y = '' " don't show file encoding
+let g:airline_section_z = '%v : %l/%L'
+
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#ale#get_warning(),0)}'
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_error(),0)}'
+
+let g:airline#extensions#ale#show_line_numbers = 0
 
 " ============================= Cscope =======================================
 

@@ -154,7 +154,7 @@ endfunction
 
 " ============================= FSwitch ======================================
 " map :A to :FSHere
-cnoreabbrev A FSHere
+command A FSHere
 
 " ============================ Syntastic =====================================
 " don't print style warnings

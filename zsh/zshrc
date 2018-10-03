@@ -60,6 +60,8 @@ function update-env {
 }
 
 function build-current-dir {
+    echo '\e]50;ClearScrollback\a'
+
     if [ -e CMakeLists.txt ] && [ -d build ]; then
         cd build
         build-current-dir $@
@@ -76,7 +78,7 @@ function build-current-dir {
 }
 
 function tmux-attach {
-    if [[ $# == 0 ]] && [[ $(tmux list-sessions | wc -l) > 1 ]]; then
+    if [[ $# == 0 ]]; then
         tmux list-sessions
         return
     fi

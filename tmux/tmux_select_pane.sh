@@ -55,3 +55,5 @@ elif [ "$edge" = 1 ]; then
 else
     tmux display wat
 fi
+
+exit 0

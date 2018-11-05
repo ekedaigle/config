@@ -263,10 +263,50 @@ augroup SessionBindings
 augroup END
 nnoremap <leader>q :call DetachSession()<CR>
 
-" ============================== UltiSnips ====================================
+" ============================== UltiSnips ===================================
 
 let g:UltiSnipsExpandTrigger='<c-s>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 let g:UltiSnipsEditSplit='context'
+
+" ============================== Markdown ====================================
+
+function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
+  let ft=toupper(a:filetype)
+  let group='textGroup'.ft
+  if exists('b:current_syntax')
+    let s:current_syntax=b:current_syntax
+    " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
+    " do nothing if b:current_syntax is defined.
+    unlet b:current_syntax
+  endif
+  execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
+  try
+    execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
+  catch
+  endtry
+  if exists('s:current_syntax')
+    let b:current_syntax=s:current_syntax
+  else
+    unlet b:current_syntax
+  endif
+  execute 'syntax region textSnip'.ft.'
+  \ matchgroup='.a:textSnipHl.'
+  \ keepend
+  \ start="'.a:start.'" end="'.a:end.'"
+  \ contains=@'.group
+endfunction
+
+" Go through the buffer, find any inline code blocks, and enable syntax
+" highlinting for the languages found. Vim can't handle enabling it for all
+" install languages, unfortunately (gave me an error last time I tried).
+function MarkdownSyntaxHighlight()
+    call map(filter(getline('1', '$'), 'v:val =~ "```.\\+"'),
+                \ 'TextEnableCodeSnip(v:val[3:], v:val, "```", "Comment")')
+endfunction
+
+augroup Markdown
+    autocmd FileType markdown call MarkdownSyntaxHighlight()
+augroup END
 

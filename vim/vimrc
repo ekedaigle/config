@@ -32,6 +32,7 @@ Plugin 'wting/rust.vim'
 Plugin 'zchee/deoplete-clang'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
+Plugin 'objdump-syntax', {'pinned' : 1}
 
 call vundle#end()
 filetype plugin on

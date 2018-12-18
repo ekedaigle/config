@@ -10,8 +10,9 @@ fi
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_LOCAL=$HOME/.zshrc-local
+ZSH_CUSTOM=$HOME/config/zsh
 
-ZSH_THEME="eastwood"
+ZSH_THEME="custom"
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 plugins=(git zsh-iterm-touchbar)
@@ -47,6 +48,8 @@ function build-current-dir {
         ninja $@
     elif [ -e SConstruct ]; then
         scons $@
+    elif [ -e Cargo.toml ]; then
+        cargo build $@
     else
         echo "Build system not found" >&2
     fi

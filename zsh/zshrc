@@ -35,7 +35,7 @@ function update-env {
 }
 
 function build-current-dir {
-    echo '\e]50;ClearScrollback\a'
+    echo '\e]50;SetMark\a'
 
     if [ -e CMakeLists.txt ] && [ -d build ]; then
         cd build
@@ -47,6 +47,8 @@ function build-current-dir {
         ninja $@
     elif [ -e SConstruct ]; then
         scons $@
+    elif [ -e Cargo.toml ]; then
+        cargo build $@
     else
         echo "Build system not found" >&2
     fi

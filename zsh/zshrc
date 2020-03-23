@@ -36,6 +36,8 @@ function update-env {
 }
 
 function build-current-dir {
+    echo '\e]50;SetMark\a'
+
     if [ -e CMakeLists.txt ] && [ -d build ]; then
         cd build
         build-current-dir $@

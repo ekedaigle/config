@@ -31,7 +31,7 @@ function cgrep {
 
 function update-env {
     if [[ -n $TMUX ]]; then
-        export DISPLAY=$(tmux showenv | grep ^DISPLAY | cut -d = -f 2)
+        export DISPLAY=$(tmux showenv | grep \^DISPLAY | cut -d = -f 2)
     fi
 }
 
@@ -82,6 +82,7 @@ function tmux-new {
 }
 
 export EDITOR=nvim
+export FZF_DEFAULT_COMMAND='ag -l --nocolor --hidden -g ""'
 
 export PATH=/usr/lib/ccache:~/bin:$PATH
 export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
@@ -120,5 +121,8 @@ if [[ -n $TMUX ]]; then
 else
     precmd() {echo -ne "\e]0; $(hostname) \007"}
 fi
+
+# Keep ctrl-D from closing shell
+set -o ignoreeof
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

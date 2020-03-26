@@ -98,6 +98,8 @@ let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_er
 
 let g:airline#extensions#ale#show_line_numbers = 0
 
+"let g:ale_linters = {'python' : ['flake8', 'mypy', 'pycodestyle']}
+
 " ============================= Cscope =======================================
 
 set nocscopeverbose
@@ -177,9 +179,11 @@ nnoremap <leader>l :TagbarToggle<CR>
 
 " ================================ deoplete ==================================
 
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 let g:deoplete#sources#clang#libclang_path = '/usr/local/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/local/lib/clang'
+
+autocmd InsertEnter * call deoplete#enable()
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :

@@ -71,3 +71,5 @@
 	tool = fugitive
 [credential]
 	helper = cache
+[advice]
+	detachedHead = false

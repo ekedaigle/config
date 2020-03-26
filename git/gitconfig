@@ -36,6 +36,7 @@
     attributesfile = ~/.gitattributes
     excludesfile = ~/.gitignore
     pager = "diff-so-fancy | less --tabs=4 -RFX"
+    askpass = ""
 
 [diff "gitconfig"]
     xfuncname = "^\\[(.+)\\]"
@@ -68,3 +69,5 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [merge]
 	tool = fugitive
+[credential]
+	helper = cache

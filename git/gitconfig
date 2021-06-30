@@ -73,3 +73,5 @@
 	helper = cache
 [advice]
 	detachedHead = false
+[submodule]
+	recurse = true

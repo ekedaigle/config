@@ -30,6 +30,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'w0rp/ale'
 Plugin 'wting/rust.vim'
 Plugin 'zchee/deoplete-clang'
+Plugin 'zchee/deoplete-jedi'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
 Plugin 'objdump-syntax', {'pinned' : 1}
@@ -98,7 +99,8 @@ let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_er
 
 let g:airline#extensions#ale#show_line_numbers = 0
 
-"let g:ale_linters = {'python' : ['flake8', 'mypy', 'pycodestyle']}
+" ============================= Airline ======================================
+let g:ale_linters = {'cpp' : ['clang']}
 
 " ============================= Cscope =======================================
 

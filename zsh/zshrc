@@ -36,20 +36,34 @@ function update-env {
 }
 
 function build-current-dir {
-    echo '\e]50;SetMark\a'
+    if [[ "$@" == "clean" ]]; then
+        if [ -e .confirm_clean ]; then
+            echo -n "Clean build? (y/n) "
+            read answer
+            if [ "$answer" != "y" ]; then
+                return
+            fi
+        fi
+    fi
+
+    if [[ "$@" == "" ]] && [ -e .build_defaults ]; then
+        args=$(cat .build_defaults)
+    else
+        args=$@
+    fi
 
     if [ -e CMakeLists.txt ] && [ -d build ]; then
         cd build
-        build-current-dir $@
+        build-current-dir $=args
         cd ..
     elif [ -e Makefile ]; then
-        make $@
+        make $=args
     elif [ -e build.ninja ]; then
-        ninja $@
+        ninja $=args
     elif [ -e SConstruct ]; then
-        scons $@
+        scons $=args
     elif [ -e Cargo.toml ]; then
-        cargo build $@
+        cargo build $=args
     else
         echo "Build system not found" >&2
     fi
@@ -84,7 +98,7 @@ function tmux-new {
 export EDITOR=nvim
 export FZF_DEFAULT_COMMAND='ag -l --nocolor --hidden -g ""'
 
-export PATH=/usr/lib/ccache:~/bin:$PATH
+export PATH=~/bin:$PATH
 export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
 
 # Set up aliases

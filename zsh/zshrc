@@ -64,6 +64,10 @@ function build-current-dir {
         scons $=args
     elif [ -e Cargo.toml ]; then
         cargo build $=args
+    elif [ -d build ]; then
+        cd build
+        build-current-dir $@
+        cd ..
     else
         echo "Build system not found" >&2
     fi

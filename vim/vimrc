@@ -12,6 +12,7 @@ Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
 Plugin 'honza/vim-snippets'
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'psf/black', { 'branch' : 'stable' }
 Plugin 'junegunn/fzf', {'dir' : '~/config/fzf', 'do': './install --all'}
 Plugin 'junegunn/fzf.vim'
 Plugin 'kana/vim-fakeclip'
@@ -53,6 +54,8 @@ set secure
 
 set ignorecase
 set smartcase
+
+"set textwidth=100
 
 " ============================= Swap files ===================================
 
@@ -98,7 +101,8 @@ let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_er
 
 let g:airline#extensions#ale#show_line_numbers = 0
 
-"let g:ale_linters = {'python' : ['flake8', 'mypy', 'pycodestyle']}
+let g:ale_linters = {'python' : ['flake8', 'mypy'], 'cpp' : ['clangcheck']}
+let g:ale_cpp_clangcheck_options = '--extra-arg="-fno-color-diagnostics"'
 
 " ============================= Cscope =======================================
 

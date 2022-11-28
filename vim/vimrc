@@ -30,6 +30,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'w0rp/ale'
 Plugin 'wting/rust.vim'
+Plugin 'rust-lang-nursery/rustfmt'
 Plugin 'zchee/deoplete-clang'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}

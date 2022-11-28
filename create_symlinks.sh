@@ -9,6 +9,7 @@ ln -sfn "$base_dir/colorgcc/colorgcc.pl" ~/bin/c++
 ln -sfn "$base_dir/colorgcc/colorgcc.pl" ~/bin/cc
 ln -sfn "$base_dir/clang-format" ~/.clang-format
 ln -sfn "$base_dir/colorgcc/colorgcc" ~/.colorgccrc
+ln -sfn "$base_dir/flake8" $XDG_CONFIG_HOME/flake8
 ln -sfn "$base_dir/git/gitconfig" ~/.gitconfig
 ln -sfn "$base_dir/git/git_template" ~/.git_template
 ln -sfn "$base_dir/tmux/tmux.conf" ~/.tmux.conf

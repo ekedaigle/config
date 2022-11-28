@@ -1,7 +1,19 @@
 #!/bin/bash
 
+contains() {
+    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && return 0 || return 1
+}
+
 # check for xpra
 if type xpra > /dev/null; then
-    echo $DISPLAY > ~/test_tmux_session_closed
-    xpra stop $DISPLAY
+    XPRA_SESSIONS=$(xpra list-sessions | grep $USER | awk '{ print $1 }' | grep ':1[0-9][0-9]' | cut -c 2-)
+    TMUX_SESSIONS=$(tmux list-sessions -F \#{session_id})
+
+    for XPRA_SESSION in $XPRA_SESSIONS; do
+        TMUX_ID=$(( $XPRA_SESSION - 100 ))
+
+        if ! contains $TMUX_SESSIONS $TMUX_ID; then
+            xpra stop :$XPRA_SESSION
+        fi
+    done
 fi

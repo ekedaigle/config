@@ -4,5 +4,7 @@
 if type xpra > /dev/null; then
     TMUX_SESSION=$(echo $TMUX | sed 's/.*,[0-9]\+,\([0-9]\+\)/\1/g')
     export DISPLAY=:$((100+$TMUX_SESSION))
+    tmux setenv DISPLAY $DISPLAY
+    tmux send-keys -t $TMUX_SESSION "export DISPLAY="$DISPLAY C-m
     xpra start $DISPLAY
 fi

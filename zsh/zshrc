@@ -123,7 +123,7 @@ function objdump-platform {
 export EDITOR=nvim
 export FZF_DEFAULT_COMMAND='ag -l --nocolor --hidden -g ""'
 
-export PATH=/usr/lib/ccache:~/bin:$PATH
+export PATH=~/bin:$PATH
 export LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
 
 # Set up aliases

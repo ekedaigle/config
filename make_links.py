@@ -5,6 +5,7 @@ LINKS = {
         'tmux/tmux.conf' : '.tmux.conf',
         'vim/vim' : '.vim',
         'vim/vimrc' : '.vimrc',
+        'vim/vimrc' : '.config/nvim/init.vim',
         'zsh/oh-my-zsh' : '.oh-my-zsh',
         'zsh/zshrc' : '.zshrc'
 }
@@ -20,7 +21,8 @@ def create_link(file_path, link_path):
     success = True
     try:
         os.symlink(file_path, link_path)
-    except OSError:
+    except OSError as e:
+        print(e)
         success = False
     
     return success
@@ -37,6 +39,6 @@ if __name__ == '__main__':
     if os.path.isabs(sys.argv[0]):
         config_dir = os.path.dirname(sys.argv[0])
     else:
-        config_dir = os.getcwd() + '/' + os.path.dirname(sys.argv[0])
+        config_dir = os.getcwd() + '/' + os.path.dirname(sys.argv[0]) + '/'
     
     create_all_links(config_dir)

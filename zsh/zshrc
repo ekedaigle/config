@@ -37,22 +37,41 @@ function update-env {
 
 function build-current-dir {
     echo '\e]50;SetMark\a'
+    export ARGS=("$@")
+
+    if [ -e .buildrc ]; then
+        source .buildrc
+
+        if [[ "$@" == "clean" ]]; then
+            if [ "$BUILD_WARN_CLEAN" -eq 1 ]; then
+                echo -n "Clean build? (y/n) "
+                read answer
+                if [ "$answer" != "y" ]; then
+                    return
+                fi
+            fi
+        fi
+
+        if [[ "$@" == "" ]]; then
+            export ARGS=($BUILD_DEFAULTS)
+        fi
+    fi
 
     if [ -e CMakeLists.txt ] && [ -d build ]; then
         cd build
-        build-current-dir $@
+        build-current-dir $ARGS
         cd ..
     elif [ -e Makefile ]; then
-        make $@
+        make $ARGS
     elif [ -e build.ninja ]; then
-        ninja $@
+        ninja $ARGS
     elif [ -e SConstruct ]; then
-        scons $@
+        scons $ARGS
     elif [ -e Cargo.toml ]; then
-        cargo build $@
+        cargo build $ARGS
     elif [ -d build ]; then
         cd build
-        build-current-dir $@
+        build-current-dir $ARGS
         cd ..
     else
         echo "Build system not found" >&2
@@ -85,6 +104,22 @@ function tmux-new {
     fi
 }
 
+function objdump-platform {
+    ARCH=$(readelf -h $1 | grep Machine | awk '{print $2}')
+
+    if [ "$ARCH" = "PowerPC" ]; then
+        OBJDUMP=/usr/powerpc-405-linux-uclibc/bin/powerpc-405-linux-uclibc-objdump
+    elif [ "$ARCH" = "Sparc" ]; then
+        OBJDUMP=sparc-elf-objdump
+    elif [ "$ARCH" = "ARM" ]; then
+        OBJDUMP=arm-unknown-linux-gnueabi-objdump
+    else
+        OBJDUMP=objdump
+    fi
+
+    $OBJDUMP -S $@ | vi -
+}
+
 export EDITOR=nvim
 export FZF_DEFAULT_COMMAND='ag -l --nocolor --hidden -g ""'
 
@@ -102,6 +137,8 @@ alias hd='hexdump -C'
 alias b=build-current-dir
 alias ta=tmux-attach
 alias tn=tmux-new
+alias rs='rsync -a --info=progress2 --info=name0'
+alias objd=objdump-platform
 
 if [[ "$platform" == 'darwin' ]]; then
 	alias ls='ls -G'

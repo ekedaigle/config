@@ -8,9 +8,6 @@
 	path = vim/vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
 	branch = master
-[submodule "neovim"]
-	path = neovim
-	url = https://github.com/neovim/neovim.git
 [submodule "vim/YCM-Generator"]
 	path = vim/YCM-Generator
 	url = https://github.com/rdnetto/YCM-Generator.git

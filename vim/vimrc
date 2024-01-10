@@ -39,6 +39,8 @@ Plugin 'objdump-syntax', {'pinned' : 1}
 call vundle#end()
 filetype plugin on
 
+let g:python3_host_prog = '~/bin/python3'
+
 set ruler
 set number
 set nohlsearch
@@ -102,8 +104,11 @@ let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_er
 
 let g:airline#extensions#ale#show_line_numbers = 0
 
-let g:ale_linters = {'python' : ['flake8', 'mypy'], 'cpp' : ['clangcheck']}
+let g:ale_linters = {'python' : ['flake8', 'mypy'], 'cpp' : ['clangd', 'clangcheck']}
 let g:ale_cpp_clangcheck_options = '--extra-arg="-fno-color-diagnostics"'
+
+let g:ale_virtualtext_cursor = 'current'
+let g:ale_virtualtext_prefix = '%type%: '
 
 " ============================= Cscope =======================================
 
@@ -186,8 +191,7 @@ nnoremap <leader>l :TagbarToggle<CR>
 " ================================ deoplete ==================================
 
 let g:deoplete#enable_at_startup = 0
-let g:deoplete#sources#clang#libclang_path = '/usr/local/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/local/lib/clang'
+call deoplete#custom#option('sources', {'_': ['ale']})
 
 autocmd InsertEnter * call deoplete#enable()
 

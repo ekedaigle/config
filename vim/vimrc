@@ -13,7 +13,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'lervag/vim-latex'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'psf/black', { 'branch' : 'stable' }
-Plugin 'junegunn/fzf', {'dir' : '~/config/fzf', 'do': './install --all'}
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'kana/vim-fakeclip'
 Plugin 'majutsushi/tagbar'
@@ -330,4 +330,8 @@ if has('persistent_undo')
     let &undodir = myUndoDir
     set undofile
 endif
+
+" ============================== FZF =========================================
+let g:fzf_vim = {}
+let g:fzf_vim.preview_window = []
 

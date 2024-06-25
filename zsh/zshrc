@@ -166,4 +166,3 @@ fi
 # Keep ctrl-D from closing shell
 set -o ignoreeof
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

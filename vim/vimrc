@@ -20,7 +20,6 @@ Plugin 'majutsushi/tagbar'
 Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'sfiera/vim-emacsmodeline'
-Plugin 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plugin 'Shougo/vimproc.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tell-k/vim-autopep8'
@@ -28,14 +27,24 @@ Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
-Plugin 'w0rp/ale'
 Plugin 'wting/rust.vim'
 Plugin 'rust-lang-nursery/rustfmt'
-Plugin 'zchee/deoplete-clang'
-Plugin 'zchee/deoplete-jedi'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
 Plugin 'objdump-syntax', {'pinned' : 1}
+
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'hrsh7th/cmp-nvim-lsp'
+Plugin 'hrsh7th/cmp-buffer'
+Plugin 'hrsh7th/cmp-path'
+Plugin 'hrsh7th/cmp-cmdline'
+Plugin 'hrsh7th/nvim-cmp'
+Plugin 'quangnguyen30192/cmp-nvim-ultisnips'
+Plugin 'petertriho/cmp-git'
+Plugin 'williamboman/mason.nvim'
+Plugin 'williamboman/mason-lspconfig.nvim'
+Plugin 'jose-elias-alvarez/null-ls.nvim'
+Plugin 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 
 call vundle#end()
 filetype plugin on
@@ -100,16 +109,19 @@ let g:airline_section_x = '' " don't show filetype
 let g:airline_section_y = '' " don't show file encoding
 let g:airline_section_z = '%v : %l/%L'
 
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#ale#get_warning(),0)}'
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_error(),0)}'
+"let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#ale#get_warning(),0)}'
+"let g:airline_section_error = '%{airline#util#wrap(airline#extensions#ale#get_error(),0)}'
 
-let g:airline#extensions#ale#show_line_numbers = 0
+"let g:airline#extensions#ale#show_line_numbers = 0
 
-let g:ale_linters = {'python' : ['flake8', 'mypy'], 'cpp' : ['clangd', 'clangcheck']}
-let g:ale_cpp_clangcheck_options = '--extra-arg="-fno-color-diagnostics"'
+" ============================== Ale =========================================
 
-let g:ale_virtualtext_cursor = 'current'
-let g:ale_virtualtext_prefix = '%type%: '
+"let g:ale_linters = {'python' : ['pylint', 'mypy'], 'cpp' : ['clangd', 'clangcheck']}
+"let g:ale_cpp_clangcheck_options = '--extra-arg="-fno-color-diagnostics"'
+"let g:ale_python_pylint_change_directory = 0
+
+"let g:ale_virtualtext_cursor = 'current'
+"let g:ale_virtualtext_prefix = '%type%: '
 
 " ============================= Cscope =======================================
 
@@ -132,11 +144,13 @@ nnoremap <leader>a :A<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>o :Files<CR>
 nnoremap <leader>u :Buffers<CR>
-nnoremap <leader>c :ALELint<CR>
+"nnoremap <leader>c :ALELint<CR>
 vmap <leader>y "+y
 vmap <leader>d "+d
 cmap w!! %!sudo tee > /dev/null %
 nnoremap Q <Nop>
+
+autocmd BufWritePost *.py silent! execute ':Black'
 
 augroup FiletypeBindings
     autocmd FileType python call s:PythonFiletypeBindings()
@@ -188,22 +202,6 @@ au BufEnter *.hpp  call s:SetVariables('cpp,cu', 'reg:/include/src/,reg:/include
 
 let g:tagbar_usearrows = 1
 nnoremap <leader>l :TagbarToggle<CR>
-
-" ================================ deoplete ==================================
-
-let g:deoplete#enable_at_startup = 0
-call deoplete#custom#option('sources', {'_': ['ale']})
-
-autocmd InsertEnter * call deoplete#enable()
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction"}}}
 
 " ================================= LaTeX ====================================
 " IMPORTANT: grep will sometimes skip displaying the file name if you
@@ -268,6 +266,7 @@ nnoremap <leader>q :call DetachSession()<CR>
 
 " ============================== UltiSnips ===================================
 
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 let g:UltiSnipsExpandTrigger='<c-s>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
@@ -335,3 +334,110 @@ endif
 let g:fzf_vim = {}
 let g:fzf_vim.preview_window = []
 
+" ============================ nvim-cmp ======================================
+
+lua <<EOF
+  vim.lsp.set_log_level("debug")
+
+  require("mason").setup()
+  require("mason-lspconfig").setup()
+  require("lsp_lines").setup()
+
+  vim.diagnostic.config({
+      virtual_lines = false,
+  })
+
+  vim.keymap.set(
+  "",
+  "<Leader>e",
+  require("lsp_lines").toggle,
+  { desc = "Toggle lsp_lines" }
+  )
+
+  -- Set up nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+       ['<Tab>'] = cmp.mapping(function (fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif vim.api.nvim_get_mode().mode == 'i' then
+                tabout.tabout()
+            else
+                fallback()
+            end
+        end, {'i', 's'}),
+        ['<S-Tab>'] = cmp.mapping(function (fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end, {'i', 's'})
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'ultisnips' }, -- For ultisnips users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  --[[cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'git' },
+    }, {
+      { name = 'buffer' },
+    })
+ })
+ require("cmp_git").setup()]]--
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    }),
+    matching = { disallow_symbol_nonprefix_matching = false }
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+	require('lspconfig')['clangd'].setup { }
+	require('lspconfig')['pylsp'].setup {
+        on_attach = on_attach,
+        settings = {
+            pylsp = {
+                plugins = {
+                    pycodestyle = { enabled = false },
+                    pylint = { enabled = true },
+                }
+            }
+        }
+    }
+EOF

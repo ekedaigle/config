@@ -47,8 +47,9 @@
 [user]
     name = Eric Kedaigle
 
-[url "https://github.com"]
-	insteadOf = git://github.com
+[url "https://github.com/"]
+    insteadOf = git@github.com:
+	insteadOf = git://github.com/
 
 [filter "nbstrip_full"]
     clean = "jq --indent 1 \

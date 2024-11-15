@@ -166,3 +166,4 @@ fi
 # Keep ctrl-D from closing shell
 set -o ignoreeof
 
+eval "$(direnv hook zsh)"

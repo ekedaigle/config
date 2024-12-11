@@ -144,6 +144,7 @@ nnoremap <leader>a :A<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>o :Files<CR>
 nnoremap <leader>u :Buffers<CR>
+nnoremap <leader>r :lua vim.lsp.buf.rename()<CR>
 "nnoremap <leader>c :ALELint<CR>
 vmap <leader>y "+y
 vmap <leader>d "+d
@@ -283,8 +284,8 @@ function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
     " do nothing if b:current_syntax is defined.
     unlet b:current_syntax
   endif
-  execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
   try
+    execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
     execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
   catch
   endtry
@@ -304,7 +305,7 @@ endfunction
 " highlinting for the languages found. Vim can't handle enabling it for all
 " install languages, unfortunately (gave me an error last time I tried).
 function MarkdownSyntaxHighlight()
-    call map(filter(getline('1', '$'), 'v:val =~ "```.\\+"'),
+    call map(filter(getline('1', '$'), 'v:val =~ "^```.\\+"'),
                 \ 'TextEnableCodeSnip(v:val[3:], v:val, "```", "Comment")')
 endfunction
 
@@ -376,8 +377,6 @@ lua <<EOF
        ['<Tab>'] = cmp.mapping(function (fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif vim.api.nvim_get_mode().mode == 'i' then
-                tabout.tabout()
             else
                 fallback()
             end

@@ -42,7 +42,9 @@
     xfuncname = "^\\[(.+)\\]"
 
 [push]
-	default = tracking
+	default = simple
+	autoSetupRemote = true
+	followTags = true
 
 [user]
     name = Eric Kedaigle
@@ -76,3 +78,19 @@
 	detachedHead = false
 [submodule]
 	recurse = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	renames = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autocorrect = prompt

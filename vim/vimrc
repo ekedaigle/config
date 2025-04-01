@@ -29,6 +29,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'wting/rust.vim'
 Plugin 'rust-lang-nursery/rustfmt'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'llvm-syntax', {'pinned' : 1}
 Plugin 'armasm', {'pinned' : 1}
 Plugin 'objdump-syntax', {'pinned' : 1}
